@@ -64,9 +64,15 @@
 	}
 
 	nav {
-		display: flex;
-		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
+		display: none;
+	}
+
+	@media (min-width: 600px) {
+		nav {
+			display: flex;
+			justify-content: center;
+			--background: rgba(255, 255, 255, 0.7);
+		}
 	}
 
 	svg {
