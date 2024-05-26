@@ -1,9 +1,9 @@
 <svelte:head>
 	<title>About</title>
-	<meta name="description" content="About this app" />
+	<meta name="description" content="About Marta" />
 </svelte:head>
 
-<div class="text-column">
+<section>
 	<h1>About this app</h1>
 
 	<p>
@@ -23,4 +23,13 @@
 		The <a href="/sverdle">Sverdle</a> page illustrates SvelteKit's data loading and form handling. Try
 		using it with JavaScript disabled!
 	</p>
-</div>
+</section>
+
+<style>
+	section {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		flex: 0.6;
+	}
+</style>

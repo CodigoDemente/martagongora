@@ -1,5 +1,7 @@
 <script>
   export let pictures; 
+  import { Modal } from 'flowbite-svelte';
+  let defaultModal = false;
 
 </script>
 
@@ -27,13 +29,13 @@
         </div>
       {/if}
   {/each}
-  
 </div>
       
   
 
 <style>
   .container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
