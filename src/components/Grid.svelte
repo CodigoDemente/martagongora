@@ -1,8 +1,5 @@
 <script>
   export let pictures; 
-  import { Modal } from 'flowbite-svelte';
-  let defaultModal = false;
-
 </script>
 
 <div class="container">
