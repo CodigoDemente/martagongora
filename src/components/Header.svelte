@@ -1,15 +1,7 @@
-<script>
-	import { page } from '$app/stores';
+<script lang="ts">
 	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
-
-	let menu = [
-		{ title: 'Diary', url: '/' },
-		{ title: 'Gallery', url: '/gallery' },
-		{ title: 'About', url: '/about' },
-		{ title: 'Contact', url: '/contact' }
-	];
-	
+	import type { MenuEntry } from '../types/menu';
+	export let menu : MenuEntry[];
 </script>
 
 <header>

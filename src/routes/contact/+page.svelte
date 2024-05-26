@@ -1,3 +1,5 @@
+<script lang="ts"></script>
+
 <svelte:head>
 	<title>Contact</title>
 	<meta name="description" content="Contact info" />

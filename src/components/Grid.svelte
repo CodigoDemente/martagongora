@@ -1,5 +1,7 @@
-<script>
-  export let pictures; 
+<script lang="ts">
+	import type { GridBlockData } from "../types/gridblock";
+
+  export let pictures: GridBlockData[]; 
 </script>
 
 <div class="container">

@@ -1,9 +1,11 @@
-<script>
+
+<script lang="ts">
 	import Grid from "../../components/Grid.svelte";
+	import type { GridBlockData } from "../../types/gridblock";
 
   	let defaultModal = false;
 
-	let pictures = [
+	let pictures : GridBlockData[] = [
 		{
 			images: [
 				{
@@ -89,10 +91,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		width: 100%;
-	}
-
-	h1 {
 		width: 100%;
 	}
 

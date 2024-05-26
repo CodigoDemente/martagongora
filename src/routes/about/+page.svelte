@@ -1,7 +1,10 @@
+<script lang="ts"></script>
+
 <svelte:head>
 	<title>About</title>
 	<meta name="description" content="About Marta" />
 </svelte:head>
+
 
 <section>
 	<h1>About this app</h1>
