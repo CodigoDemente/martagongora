@@ -1,17 +1,28 @@
-<script>
-	import Header from './Header.svelte';
+<script lang="ts">
+	import Header from '../components/Header.svelte';
+	import type { MenuEntry } from '../types/menu';
 	import './styles.css';
+
+
+
+	let menu : MenuEntry[] = [
+		{ title: 'Diary', url: '/' },
+		{ title: 'Gallery', url: '/gallery' },
+		{ title: 'About', url: '/about' },
+		{ title: 'Contact', url: '/contact' }
+	];
+	
 </script>
 
 <div class="app">
-	<Header />
+	<Header menu={menu}/>
 
 	<main>
 		<slot />
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>Marta Gongora Fotografía ©  Todos los derechos reservados/All rights reserved.</p>
 	</footer>
 </div>
 
@@ -39,10 +50,6 @@
 		justify-content: center;
 		align-items: center;
 		padding: 12px;
-	}
-
-	footer a {
-		font-weight: bold;
 	}
 
 	@media (min-width: 480px) {
