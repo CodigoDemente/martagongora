@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '$lib/images/svelte-logo.svg';
+	import logo from '$lib/images/logo.png';
 	import type { MenuEntry } from '../types/menu';
 	export let menu : MenuEntry[];
 </script>
@@ -32,9 +32,7 @@
 	}
 
 	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
+		width: 12rem;
 	}
 
 	nav {
@@ -69,9 +67,8 @@
 		align-items: center;
 		padding: 0 0.5rem;
 		color: var(--color-text);
-		font-weight: 600;
-		text-transform: uppercase;
-		font-size: 1rem;
+		font-weight: 400;
+		font-size: 1.2rem;
 		letter-spacing: 0.12em;
 		text-decoration: none;
 		transition: color 0.2s linear;
