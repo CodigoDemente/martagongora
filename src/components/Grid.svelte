@@ -2,27 +2,34 @@
 	import type { GridBlockData } from "../types/gridblock";
 
   export let pictures: GridBlockData[]; 
+  export let defaultModal: boolean;
+  export let pictureId: string;
+
+  const openModal = (id:string) => {
+    pictureId = id;
+    defaultModal = true;
+  }
 </script>
 
 <div class="container">
   {#each pictures as {images}}
       {#if images.length === 1}
-        <img src={images[0].src} alt={images[0].alt} />
+        <img on:click={() => openModal(images[0].id)} src={images[0].src} alt={images[0].alt} />
       {/if}
       {#if images.length === 2}
         <div class="duo">
-          {#each images as {src, alt}}
-            <img src={src} alt={alt} />
+          {#each images as {src, alt, id}}
+            <img on:click={() => (openModal(id))} src={src} alt={alt} />
           {/each}
         </div>
       {/if}
       {#if images.length === 4}
         <div class="quatruo">
-          {#each images as {src, alt}, i}
+          {#each images as {src, alt, id}, i}
           {#if i === 0 || i === 3}
-            <img class="small" src={src} alt={alt} />
+            <img on:click={() => (openModal(id))} class="small" src={src} alt={alt} />
           {:else}
-            <img class="large" src={src} alt={alt} />
+            <img on:click={() => (openModal(id))} class="large" src={src} alt={alt} />
             {/if}
           {/each}
         </div>
@@ -67,7 +74,8 @@
 
   img {
     width: 100%;
-    height: auto;
+    cursor: pointer;
+    /* height: auto; */
   }
    
 </style>
