@@ -6,7 +6,9 @@
 </svelte:head>
 
 <section>
-	<h1>Contact</h1>
+	<div class="img-container">
+		<img src='src/lib/images/V_2023_07_01_Cristina y Luis-362.jpg' alt='contact-picture' />
+	</div>
 	<form>
 		<label for="date">Date of the marriage</label>
 		<input type="date" id="date" name="date" required>
@@ -31,10 +33,17 @@
 
 <style>
 	section {
+		padding-top: 60px;
 		display: flex;
-		flex-direction: column;
 		align-items: center;
-		flex: 0.6;
+		justify-content: center;
+		gap: 8rem;
+	}
+	.img-container {
+		width: 100%;
+	}
+	img {
+		width: 100%;
 	}
 
 	form {
@@ -42,6 +51,7 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 1rem;
+		width: 100%;
 	}
 
 	label {
@@ -51,6 +61,11 @@
 	input, textarea {
 		width: 100%;
 		padding: 1rem;
+		border-width: 0px 0px 1px 0px;
+	}
+
+	textarea#message {
+    	height: 150px;	
 	}
 
 	button {
