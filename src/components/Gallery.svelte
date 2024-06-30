@@ -5,9 +5,7 @@
     export let defaultModal: boolean;
     
     $: getPositionInArrayById = gallery.find((image) => image.id === pictureId);
-    // fint the index of the image in the array
     $: getIndexInArrayById = gallery.findIndex((image) => image.id === pictureId);
-    // find the next image in the array
 </script>
 
 <div class={defaultModal ? 'modal-open': 'modal'}>
