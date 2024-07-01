@@ -17,7 +17,12 @@
 					src: 'src/lib/images/V_2023_07_01_Cristina y Luis-362.jpg',
 					alt: 'Kitten 2',
 					id: "2"
-				}
+				},
+				{
+					src: 'src/lib/images/V_2023_03_11_Isabel y JoseÌ_alta-723.jpg',
+					alt: 'Kitten 1',
+					id: "12"
+				},
 			]
 		},
 		{
@@ -55,6 +60,20 @@
 					src: 'src/lib/images/H_2023_03_11_Isabel y JoseÌ_alta-688.jpg',
 					alt: 'Kitten 4',
 					id: "8"
+				}
+			]
+		},
+			{
+			images: [
+				{
+					src: 'src/lib/images/V_2023_03_11_Isabel y JoseÌ_alta-723.jpg',
+					alt: 'Kitten 1',
+					id: "14"
+				},
+				{
+					src: 'src/lib/images/V_2023_07_01_Cristina y Luis-362.jpg',
+					alt: 'Kitten 2',
+					id: "16"
 				}
 			]
 		},

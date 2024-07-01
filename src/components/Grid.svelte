@@ -16,15 +16,8 @@
       {#if images.length === 1}
         <img on:click={() => openModal(images[0].id)} src={images[0].src} alt={images[0].alt} />
       {/if}
-      {#if images.length === 2}
-        <div class="duo">
-          {#each images as {src, alt, id}}
-            <img on:click={() => (openModal(id))} src={src} alt={alt} />
-          {/each}
-        </div>
-      {/if}
       {#if images.length === 4}
-        <div class="quatruo">
+        <div class="mosaic">
           {#each images as {src, alt, id}, i}
           {#if i === 0 || i === 3}
             <img on:click={() => (openModal(id))} class="small" src={src} alt={alt} />
@@ -34,6 +27,14 @@
           {/each}
         </div>
       {/if}
+      {#if images.length > 1 && images.length < 4}
+        <div class="line">
+          {#each images as {src, alt, id}}
+            <img on:click={() => (openModal(id))} src={src} alt={alt} />
+          {/each}
+        </div>
+      {/if}
+    
   {/each}
 </div>
       
@@ -48,20 +49,7 @@
     align-items: center;
   }
 
-  .duo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    padding-bottom: 1rem;
-  }
-
-  .quatruo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 1rem;
-    padding-bottom: 1rem;
-  }
+ 
 
   .small {
     grid-row: span 1;
@@ -77,6 +65,23 @@
     cursor: pointer;
     /* height: auto; */
   }
+
+  @media (min-width: 600px) {
+	.line {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .mosaic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+	}
    
 </style>
     
