@@ -10,15 +10,21 @@
 
 <div class={defaultModal ? 'modal-open': 'modal'}>
 	<div class="modal-content">
-      <button on:click={() => (pictureId = gallery[getIndexInArrayById - 1].id)} class="buttons previous">
-        <IconChevronLeft size={55} stroke={1} />
-      </button>
+     
   		{#if getPositionInArrayById}
-  		<img class="modal-image" src={gallery[getIndexInArrayById].src} alt={gallery[getIndexInArrayById].alt} />
-  		{/if}
-      <button on:click={() => (pictureId = gallery[getIndexInArrayById + 1].id)} class="buttons next">
-        <IconChevronRight size={55} stroke={1} />
+      {#if gallery[getIndexInArrayById].id !== gallery[0].id}
+       <button on:click={() => (pictureId = gallery[getIndexInArrayById - 1].id)} class="buttons previous">
+        <IconChevronLeft size={45} stroke={1} />
       </button>
+      {/if}
+  		<img class="modal-image" src={gallery[getIndexInArrayById].src} alt={gallery[getIndexInArrayById].alt} />
+       {#if gallery[getIndexInArrayById].id !== gallery[gallery.length - 1].id}
+       <button on:click={() => (pictureId = gallery[getIndexInArrayById + 1].id)} class="buttons next">
+        <IconChevronRight size={45} stroke={1} />
+      </button>
+      {/if}
+  		{/if}
+     
   		<button on:click={() => (defaultModal = false)} class="close"> <IconX size={30} stroke={2} /></button>
 	</div>
 </div>
@@ -32,7 +38,7 @@
       display: block;
       position: fixed;
       z-index: 1;
-      padding-top: 20px;
+      padding-top: 10px;
       left: 0;
       top: 0;
     	width: 100%;
@@ -47,21 +53,22 @@
       margin: auto;
       padding: 20px;
       width: 90%;
+      height: 94%;
       display: flex;
       justify-content: center;
       position: relative
     }
 
     .modal-image {
-     max-height: 92vh;
+      max-width: 85%;
+      object-fit: contain;
     }
 
     .close {
       color: #625e5e;
       position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 30px;
+      top: 10px;
+      right: 10px;
       border: none;
         background: none;
         cursor: pointer;
@@ -78,21 +85,31 @@
       color: #625e5e;
       position: absolute;
       top: 50%;
-      font-size: 30px;
       border: none;
       background: none;
       cursor: pointer;
       &.next {
-        right: 20px;
+        right: 0px;
       }
       &.previous {
-        left: 20px;
+        left: 0px;
       }
     }
 
     .buttons:hover {
       color: #c2bebe;
       cursor: pointer;
+    }
+
+    @media (min-width: 600px) {
+      .modal-content {
+      width: 90%;
+      height: 94%;
+      }
+
+      .close {
+      top: 20px;
+      }
     }
 
 </style>
