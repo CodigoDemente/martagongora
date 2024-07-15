@@ -41,6 +41,7 @@
 		align-items: center;
 		gap: 2rem;
 		padding-top: 1.5rem;
+		padding-bottom: 4rem;
 	}
 
 	.corner img {
@@ -74,6 +75,7 @@
 		background-color: white;
 		width: 100%;
 		height: 30%;
+		z-index: 5;
 	}
 
 	li {
@@ -105,9 +107,10 @@
 		border: none;
 		color: var(--color-text);
 		cursor: pointer;
+		z-index: 10;
 	}
 
-	@media (min-width: 600px) {
+	@media (min-width: 520px) {
 		nav {
 			display: flex;
 		}
@@ -128,6 +131,7 @@
 			position: relative;
 			flex-direction: row;
 			background-color: transparent;
+			z-index: 0;
 		}
 	}
 </style>

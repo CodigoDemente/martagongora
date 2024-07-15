@@ -1,7 +1,5 @@
+import type { Image } from "./image";
+
 export type GridBlockData = {
-	images: {
-		src: string;
-		alt: string;
-		id: string;
-	}[];
+	images: Image[];
 };
