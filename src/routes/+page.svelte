@@ -1,33 +1,44 @@
 
 <script lang="ts">
+    import { inview } from 'svelte-inview';
+    import type { ObserverEventDetails, Options } from 'svelte-inview';
 	import { onMount } from 'svelte';
 
-	let pictures:any;
+	let pictures: any[] = [];
+    let isLoading = true;
+    let error = false;
+    let nextId:string|null = null;
+
+    const getImagesFromInstagram = async (id:string|null) => {
+        let url = 'https://marta.cloud.alesanchez.es/instagram/media';
+        if (id) {
+            url += `?next=${id}`;
+        }
+
+        const res = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            }
+        });
+
+         const { data, next } = await res.json();
+       if (Array.isArray(data)) {
+            pictures = [...pictures, ...data];
+            nextId = next;
+            isLoading = false;
+        } else {
+          error = true;
+          isLoading = false;
+        }
+    }
 
 	
     onMount(async () => {
-        fetch('https://marta.cloud.alesanchez.es/instagram/media',
-            {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                }
-            }
-        )
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
-            pictures = data;
-        }).catch(error => {
-            console.error('Error:', error);
-        });
+        getImagesFromInstagram(nextId);
     });
+
 </script>
 
 <svelte:head>
@@ -36,17 +47,29 @@
 </svelte:head>
 
 <section>
-	{#if pictures !== undefined}
-	<p>BIEN</p>
-	{/if}
+    {#each pictures as {media_url, media_type}, i}
+        <img src={media_url} alt={media_type} />  
+    {/each}
+  
+
+    {#if !isLoading && !error}
+    <div use:inview={{ threshold: 0.5}} on:inview_change={() => getImagesFromInstagram(nextId)}>
+        Loading more pictures...
+    </div>
+    {/if}
 </section>
 
 <style>
 	section {
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
+		flex-wrap: wrap;
+        justify-content: center;
 	}
+
+    img {
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+        object-fit: fill;
+    }
 </style>
