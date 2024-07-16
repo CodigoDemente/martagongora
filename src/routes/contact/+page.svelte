@@ -1,4 +1,7 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import img1 from '$lib/images/H_2023_03_11_Isabel y JoseÌ_alta-688.jpg';
+	import img2 from '$lib/images/V_2023_07_01_Cristina y Luis-362.jpg';
+</script>
 
 <svelte:head>
 	<title>Contact</title>
@@ -6,8 +9,7 @@
 </svelte:head>
 
 <section class="section-1">
-
-	<img class="img-1" src='src/lib/images/H_2023_03_11_Isabel y JoseÌ_alta-688.jpg' alt='contact-picture' />
+	<img class="img-1" src={img1} alt='contact-picture' />
 	<form class="form-1">
 		<label class="label-1" for="date">Date of the marriage</label>
 		<input type="date" id="date" name="date" required>
@@ -26,13 +28,9 @@
 
 		<button class="button-1" type="submit">Enviar</button>
 	</form>
-
-	
-	
-
 </section>
 <section class="section-2">
-		<img class="img-2" src='src/lib/images/V_2023_07_01_Cristina y Luis-362.jpg' alt='contact-picture' />
+	<img class="img-2" src={img2} alt='contact-picture' />
 	<form class="form-2">
 		<p>Fill the form to get into contact with me.</p>
 		<label class="label-2" for="date">Date of the marriage</label>

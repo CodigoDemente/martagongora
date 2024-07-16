@@ -3,23 +3,27 @@
 	import Gallery from "../../components/Gallery.svelte";
 	import Grid from "../../components/Grid.svelte";
 	import type { GridBlockData } from "../../types/gridblock";
+	import img1 from '$lib/images/V_2023_03_11_Isabel y JoseÌ_alta-723.jpg';
+	import img2 from '$lib/images/V_2023_07_01_Cristina y Luis-362.jpg';
+	import img3 from '$lib/images/H_2023_03_11_Isabel y JoseÌ_alta-367.jpg';
+	import img4 from '$lib/images/H_2023_03_11_Isabel y JoseÌ_alta-688.jpg';
 	
 
 	let pictures : GridBlockData[] = [
 		{
 			images: [
 				{
-					src: 'src/lib/images/V_2023_03_11_Isabel y JoseÌ_alta-723.jpg',
+					src: img1,
 					alt: 'Kitten 1',
 					id: "1"
 				},
 				{
-					src: 'src/lib/images/V_2023_07_01_Cristina y Luis-362.jpg',
+					src: img2,
 					alt: 'Kitten 2',
 					id: "2"
 				},
 				{
-					src: 'src/lib/images/V_2023_03_11_Isabel y JoseÌ_alta-723.jpg',
+					src: img1,
 					alt: 'Kitten 1',
 					id: "12"
 				},
@@ -28,12 +32,12 @@
 		{
 			images: [
 				{
-					src: 'src/lib/images/H_2023_03_11_Isabel y JoseÌ_alta-367.jpg',
+					src: img3,
 					alt: 'Kitten 3',
 					id: "3"
 				},
 				{
-					src: 'src/lib/images/H_2023_03_11_Isabel y JoseÌ_alta-688.jpg',
+					src: img4,
 					alt: 'Kitten 4',
 					id: "4"
 				}
@@ -42,22 +46,22 @@
 		{
 			images: [
 				{
-					src: 'src/lib/images/H_2023_03_11_Isabel y JoseÌ_alta-367.jpg',
+					src: img3,
 					alt: 'Kitten 3',
 					id: "5"
 				},
 				{
-					src: 'src/lib/images/V_2023_03_11_Isabel y JoseÌ_alta-723.jpg',
+					src: img1,
 					alt: 'Kitten 1',
 					id: "6"
 				},
 				{
-					src: 'src/lib/images/V_2023_07_01_Cristina y Luis-362.jpg',
+					src: img2,
 					alt: 'Kitten 2',
 					id: "7"
 				},
 				{
-					src: 'src/lib/images/H_2023_03_11_Isabel y JoseÌ_alta-688.jpg',
+					src: img4,
 					alt: 'Kitten 4',
 					id: "8"
 				}
@@ -66,12 +70,12 @@
 			{
 			images: [
 				{
-					src: 'src/lib/images/V_2023_03_11_Isabel y JoseÌ_alta-723.jpg',
+					src: img1,
 					alt: 'Kitten 1',
 					id: "14"
 				},
 				{
-					src: 'src/lib/images/V_2023_07_01_Cristina y Luis-362.jpg',
+					src: img2,
 					alt: 'Kitten 2',
 					id: "16"
 				}
@@ -80,7 +84,7 @@
 		{
 			images: [
 				{
-					src: 'src/lib/images/H_2023_03_11_Isabel y JoseÌ_alta-367.jpg',
+					src: img3,
 					alt: 'Kitten 3',
 					id: "9"
 				}
