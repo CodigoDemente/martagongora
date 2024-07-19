@@ -104,7 +104,6 @@
 
 	.separator {
 		max-width: 250px;
-		padding: 60px 0;
 	}
 
 	.horizontal {
@@ -135,11 +134,11 @@
 	}
 
 	@keyframes fadeIn {
-  	0% { opacity: 0; }
-  	100% { opacity: 1; }
-		}
+  		0% { opacity: 0; }
+  		100% { opacity: 1; }
+	}
 
-	@media (min-width: 520px) {
+	@media (min-width: 600px) {
 		.horizontal {
 			flex-direction: row-reverse;
 			gap: 80px;
@@ -158,7 +157,7 @@
 	
 	}
 
-		@media (min-width: 1200px) {
+	@media (min-width: 1240px) {
 
 		.horizontal {
 			flex-direction: row-reverse;
@@ -166,11 +165,16 @@
 			align-items: end
 		}
 
+		.separator {
+			max-width: 250px;
+			padding: 40px 0;
+		}
+
 		h2 {
 			display: block;
 			position: absolute;
 			top: 0;
-			right: 42%;;
+			right: 45%;;
 			font-size: 1.8em;
 			font-weight: 600;
 			color: rgba(0, 0, 0, 0.555);

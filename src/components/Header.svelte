@@ -98,6 +98,7 @@
 
 	a:hover {
 		color: var(--color-theme-1);
+		text-decoration: underline;
 	}
 
 	button {
@@ -110,9 +111,16 @@
 		z-index: 10;
 	}
 
-	@media (min-width: 520px) {
+	@media (min-width: 600px) {
 		nav {
 			display: flex;
+		}
+
+		nav a {
+			font-size: 1rem;
+			letter-spacing: 0.12em;
+			font-weight: 500;
+			text-transform: uppercase;
 		}
 
 		button {
@@ -132,6 +140,18 @@
 			flex-direction: row;
 			background-color: transparent;
 			z-index: 0;
+		}
+	}
+
+	@media (min-width: 905px) {
+
+		ul {
+			gap: 4.5rem;
+		}
+		nav a {
+			font-size: 1.1rem;
+			letter-spacing: 0.17em;
+			font-weight: 500;
 		}
 	}
 </style>

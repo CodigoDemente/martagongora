@@ -63,16 +63,18 @@
 		font-size: 1.2rem;
 		font-weight: 500;
 		color: rgb(92, 89, 89);
-		margin-bottom: 80px;
+		margin-bottom: 40px;
 	}
 
 	.section-2 {
-		margin-top: 1000px;
+		margin-top: 100px;
 		display:flex;
 		flex-direction: column;
-		gap: 80px;
+		gap: 40px;
 		align-items: center;
 	}
+
+	
 	.img-1 {
 		display: none;
 	}
@@ -85,16 +87,21 @@
 	}
 
 	.form-1 {
-		position: absolute;
-		top: 2%;
-		left: 0;
 		display: flex;
 		flex-direction: column;
+		// position: absolute;
+		// top: 2%;
+		// left: 0;
 		align-items: center;
 		gap: 1rem;
 		background-color: rgba(0, 0, 0, 0.555);
 		padding: 40px;
 		border-radius: 8px;
+	}
+
+	.form-2 {
+		display: flex;
+		flex-direction: column;
 	}
 
 	.label-1 {
@@ -114,7 +121,7 @@
 		padding: 1rem;
 		border-width: 0px 0px 1px 0px;
 		border-radius: 6px;
-		margin-bottom: 30px;
+		margin-bottom: 10px;
 	}
 
 	textarea#message {
@@ -152,46 +159,71 @@
   	100% { opacity: 1; }
 		}
 
-	@media (min-width: 520px) {
+	@media (min-width: 600px) {
 
 		.section-2 {
-		margin-top: 80px;
-		display:flex;
-		flex-direction: row;
-		gap: 120px;
-		align-items: center;
-	}
-
-	.img-2 {
-		display: block;
-		width: 50%;
-		object-fit: cover;
-		max-height: 900px;
-	}
-		.img-1 {
-			display: block;
-			width: 100%;
-			object-fit: cover;
-			min-height: 780px;
+			margin-top: 80px;
+			display:flex;
+			flex-direction: row;
+			gap: 120px;
+			align-items: center;
 		}
-	}
-	@media (min-width: 1200px) {
 
-	.section-1 {
-		position: relative;
+		.img-2 {
+			display: block;
+			width: 50%;
+			object-fit: cover;
+			max-height: 900px;
+		}
+		// .img-1 {
+		// 	display: block;
+		// 	width: 100%;
+		// 	object-fit: cover;
+		// 	min-height: 780px;
+		// }
 	}
+	@media (min-width: 1240px) {
 
-	
-	.img-1 {
-		width: 100%;
-		display: block;
-	}
-	.form-1 {
-		position: absolute;
-		top: 1%;
-		left: 0;
-		width: 40%;
-	}
+		.section-1 {
+			position: relative;
+		}
+
+		.section-2 {
+			margin-top: 80px;
+			display:flex;
+			flex-direction: row;
+			gap: 120px;
+			align-items: center;
+		}
+
+
+		.img-1 {
+			width: 100%;
+			display: block;
+		}
+		.form-1 {
+			position: absolute;
+			top: 1%;
+			left: 0;
+			width: 40%;
+		}
+
+		
+
+		.form-2 {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+		}
+
+		.form-2 input {
+			margin-bottom: 40px;
+		}
+
+		.button-2 {
+			margin-top: 20px;
+		}
 
 	}
 
