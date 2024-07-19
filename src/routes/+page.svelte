@@ -3,6 +3,7 @@
     import { inview } from 'svelte-inview';
     import type { ObserverEventDetails, Options } from 'svelte-inview';
 	import { onMount } from 'svelte';
+	import Gallery from '../components/Gallery.svelte';
 
 	let pictures: any[] = [];
     let isLoading = true;
@@ -25,7 +26,14 @@
 
          const { data, next } = await res.json();
        if (Array.isArray(data)) {
-            pictures = [...pictures, ...data];
+            const mappedData = data.map((picture)=> {
+                return {
+                    src: picture.media_url,
+                    alt: picture.media_type,
+                    id: picture.media_url
+                }
+            });
+            pictures = [...pictures, ...mappedData];
             nextId = next;
             isLoading = false;
         } else {
@@ -38,6 +46,14 @@
     onMount(async () => {
         getImagesFromInstagram(nextId);
     });
+    
+    let defaultModal = false;
+	let pictureId = "";
+
+    const openModal = (id:string) => {
+        pictureId = id;
+        defaultModal = true;
+    }
 
 </script>
 
@@ -47,8 +63,8 @@
 </svelte:head>
 
 <section>
-    {#each pictures as {media_url, media_type}, i}
-        <img src={media_url} alt={media_type} />  
+    {#each pictures as {src, alt, id}, i}
+        <img on:click={() => (openModal(id))} src={src} alt={alt} />  
     {/each}
   
 
@@ -57,6 +73,7 @@
         Loading more pictures...
     </div>
     {/if}
+    <Gallery gallery={pictures} bind:defaultModal bind:pictureId />
 </section>
 
 <style>
@@ -67,9 +84,30 @@
 	}
 
     img {
-        width: 200px;
-        height: 200px;
-        margin: 10px;
+        width: 105px;
+        height: 105px;
         object-fit: fill;
+        cursor: pointer;
     }
+
+    @media (min-width: 600px) {
+        img {
+            width: 160px;
+            height: 160px;
+        }
+	}
+
+	@media (min-width: 905px) {
+        img {
+            width: 195px;
+            height: 195px;
+        }	
+	}
+
+    @media (min-width: 1240px) {
+        img {
+            width: 205px;
+            height: 205px;
+        }	
+	}
 </style>
