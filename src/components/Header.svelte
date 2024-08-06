@@ -2,6 +2,7 @@
 	import logo from '$lib/images/logo.png';
 	import type { MenuEntry } from '../types/menu';
 	import { IconMenu, IconX } from '@tabler/icons-svelte';
+	import LanguageSelector from './LanguageSelector.svelte';
 	
 	export let menu : MenuEntry[];
 	$: open = false;
@@ -21,6 +22,7 @@
 				<a on:click={() => open = false} href={url}>{title}</a>
 			</li>
 			{/each}
+			<LanguageSelector locales={['en', 'es']} />
 		</ul>
 	</nav>
 
@@ -112,6 +114,16 @@
 	}
 
 	@media (min-width: 600px) {
+
+		header {
+			position: none;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			padding-inline: 1.5rem;
+			padding-bottom: 3rem;
+		}
 		nav {
 			display: flex;
 		}
@@ -146,7 +158,7 @@
 	@media (min-width: 905px) {
 
 		ul {
-			gap: 4.5rem;
+			gap: 3rem;
 		}
 		nav a {
 			font-size: 1.1rem;
