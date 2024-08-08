@@ -1,22 +1,6 @@
-# create-svelte
+## Start the project
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
-
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+First install the project with `npm install` start a development server:
 
 ```bash
 npm run dev
@@ -35,4 +19,17 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## How
+
+----- Here write stuff ----
+
+### Translations
+
+Each language has its own translation file, which contains all the text content organized into different sections. These translation files are stored in the browser's localStorage to improve performance and reduce the need for repeated server requests. The stored translation files are valid for one day. After this period, when a user selects a language, the application will make a new request to the server to fetch the updated translation file and store it again in localStorage.
+
+### Packages installed 
+
+- tabler-icons: [Tabler icons](https://tabler.io/icons) svelte pluggin 
+- svelte-inview: for lazy loading on images
+- @sveltejs/adapter-vercel: to upload project on vercel, else not working.
+- sass
