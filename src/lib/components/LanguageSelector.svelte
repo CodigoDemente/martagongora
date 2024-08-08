@@ -1,14 +1,21 @@
 <script lang="ts">
 	import { IconChevronDown, IconChevronUp } from "@tabler/icons-svelte";
+	import type { Language } from "../../types/language";
 
-	export let locales: string[];
+	export let languages: Language[];
+    export let currentLanguage: string;
+  
     let open: boolean = false;
-    $: activeLang = locales[0];
+    
+    const updateLanguage = (lang: string) => {
+        currentLanguage = lang;
+    }
+
 </script>
 
 <div>
-<button on:click={() => open = !open} on:blur={() => open = false}>
-    {activeLang}
+<button on:click={() => open = !open}>
+    {currentLanguage}
     {#if open}
     <IconChevronUp size={15} stroke={1} />
     {:else}
@@ -16,10 +23,10 @@
     {/if}
 </button>
 <ul class={open ? 'list' : 'hide'}>
-    {#each locales as lang}
+    {#each languages as lang}
         <li>
-            <button  on:click={() => activeLang = lang}>
-            {lang}
+            <button  on:click={() => updateLanguage(lang.code)}>
+            {lang.code}
             </button>
         </li>
     {/each}
@@ -27,7 +34,7 @@
 </div>
 
 <style lang="scss">
-    @import '../styles/colors.scss';
+    @import '../../styles/colors.scss';
     div {
         position:relative
     }

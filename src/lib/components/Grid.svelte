@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { GridBlockData } from "../types/gridblock";
+	import type { GridBlockData } from "../../types/gridblock";
 
   export let pictures: GridBlockData[]; 
   export let defaultModal: boolean;
