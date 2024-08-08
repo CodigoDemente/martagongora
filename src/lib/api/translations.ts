@@ -1,4 +1,3 @@
-import { browser } from "$app/environment";
 import type { Language } from "../../types/language";
 
 export async function fetchTranslationLanguages(): Promise<Language[]> {
