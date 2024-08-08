@@ -1,8 +1,8 @@
 
 <script lang="ts">
-	import Gallery from "../../components/Gallery.svelte";
-	import Grid from "../../components/Grid.svelte";
-	import type { GridBlockData } from "../../types/gridblock";
+	import Gallery from "$lib/components/Gallery.svelte";
+	import Grid from "$lib/components/Grid.svelte";
+	import type { GridBlockData } from "$lib/types/gridblock";
 	import img1 from '$lib/images/V_2023_03_11_Isabel y JoseÌ_alta-723.jpg';
 	import img2 from '$lib/images/V_2023_07_01_Cristina y Luis-362.jpg';
 	import img3 from '$lib/images/H_2023_03_11_Isabel y JoseÌ_alta-367.jpg';

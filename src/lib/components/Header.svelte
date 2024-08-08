@@ -1,10 +1,14 @@
 <script lang="ts">
 	import logo from '$lib/images/logo.png';
+	import type { Language } from '../types/language';
 	import type { MenuEntry } from '../types/menu';
 	import { IconMenu, IconX } from '@tabler/icons-svelte';
 	import LanguageSelector from './LanguageSelector.svelte';
 	
 	export let menu : MenuEntry[];
+	export let languages : Language[];
+	export let currentLanguage : string;
+	
 	$: open = false;
 </script>
 
@@ -22,7 +26,7 @@
 				<a on:click={() => open = false} href={url}>{title}</a>
 			</li>
 			{/each}
-			<LanguageSelector locales={['en', 'es']} />
+			<LanguageSelector bind:currentLanguage {languages} />
 		</ul>
 	</nav>
 

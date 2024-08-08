@@ -3,7 +3,7 @@
     import { inview } from 'svelte-inview';
     import type { ObserverEventDetails, Options } from 'svelte-inview';
 	import { onMount } from 'svelte';
-	import Gallery from '../components/Gallery.svelte';
+	import Gallery from '$lib/components/Gallery.svelte';
 
 	let pictures: any[] = [];
     let isLoading = true;
