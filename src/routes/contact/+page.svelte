@@ -51,7 +51,7 @@
 
 
 <style lang="scss">
-	@import '$lib/styles/colors.scss';
+	@import '../../styles/colors.scss';
 	section {
 		display:flex;
 		flex-direction: column;

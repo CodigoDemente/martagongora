@@ -1,7 +1,7 @@
 <script lang="ts">
 	import logo from '$lib/images/logo.png';
-	import type { Language } from '../types/language';
-	import type { MenuEntry } from '../types/menu';
+	import type { Language } from '../../types/language';
+	import type { MenuEntry } from '../../types/menu';
 	import { IconMenu, IconX } from '@tabler/icons-svelte';
 	import LanguageSelector from './LanguageSelector.svelte';
 	

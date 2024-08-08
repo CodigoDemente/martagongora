@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { IconChevronDown, IconChevronUp } from "@tabler/icons-svelte";
-	import type { Language } from "../types/language";
+	import type { Language } from "../../types/language";
 
 	export let languages: Language[];
     export let currentLanguage: string;
@@ -34,7 +34,7 @@
 </div>
 
 <style lang="scss">
-    @import '$lib/styles/colors.scss';
+    @import '../../styles/colors.scss';
     div {
         position:relative
     }

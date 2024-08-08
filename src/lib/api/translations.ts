@@ -1,5 +1,5 @@
 import { browser } from "$app/environment";
-import type { Language } from "../types/language";
+import type { Language } from "../../types/language";
 
 export async function fetchTranslationLanguages(): Promise<Language[]> {
     const url = 'https://marta.cloud.alesanchez.es/language';

@@ -2,8 +2,8 @@
 	import { onMount } from 'svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import type { MenuEntry } from '$lib/types/menu';
-	import type { Language } from '$lib/types/language';
+	import type { MenuEntry } from '../types/menu';
+	import type { Language } from '../types/language';
 	import { fetchTranslationFiles, fetchTranslationLanguages } from '$lib/api/translations';
 	import { checkCache, setCache } from '$lib/services/localStorage';
 	import './styles.css';
