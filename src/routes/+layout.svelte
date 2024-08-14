@@ -6,20 +6,22 @@
 	import type { Language } from '../types/language';
 	import { fetchTranslationFiles, fetchTranslationLanguages } from '$lib/api/translations';
 	import { checkCache, setCache } from '$lib/services/localStorage';
+	import translationStore, { type TranslationKeys } from '$lib/services/translationStore';
 	import './styles.css';
 
 	let isLoading:boolean = true;
     let error:boolean = false;
 	let currentLanguage:string = 'es';
 	let languages:Language[] = [];
-	
 
-	let menu : MenuEntry[] = [
-		{ title: 'Diary', url: '/' },
-		{ title: 'Gallery', url: '/gallery' },
-		{ title: 'About', url: '/about' },
-		{ title: 'Contact', url: '/contact' }
-	];
+	const menuKeyToUrl = {
+		diary: 'publicaciones',
+		gallery: 'galeria',
+		about: 'sobre-mi',
+		contact: 'contacto'
+	};
+
+	let menu: MenuEntry[];
 
 	let footerContent = {
 		links: [
@@ -32,12 +34,14 @@
 	export async function getTranslationFiles(lang: string): Promise<any> {
     	const cachedData = checkCache(lang);
     	if (cachedData) {
+			$translationStore = cachedData;
     	    return cachedData;
     	}
 
     	const data = await fetchTranslationFiles(lang);
     	setCache(lang, data);
 		
+		$translationStore = data;
     	return data;
 	}	
 
@@ -55,7 +59,15 @@
     });
 
 	$: if (currentLanguage) {
-		getTranslationFiles(currentLanguage)
+	 	getTranslationFiles(currentLanguage)
+	}
+
+	$: if ($translationStore) {
+		menu = Object.entries(menuKeyToUrl).map(([key, value]) =>({
+				title: $translationStore[key as TranslationKeys].title,
+				url: `/${value}`
+			}))
+
 	}
 
 </script>
