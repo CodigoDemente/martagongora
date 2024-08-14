@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Input } from "../types/input";
+	import type { Input } from "../../types/input";
 
 	export let inputs: Input[];
     export let text: string; 
@@ -21,7 +21,7 @@
 </form>
 
 <style lang="scss">
-    @import '../styles/colors.scss';
+    @import '../../styles/colors.scss';
 
 	form {
 		display: flex;

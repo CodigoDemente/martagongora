@@ -1,6 +1,6 @@
 <script lang="ts">
 	import profileImg from '$lib/images/V_2023_07_01_Cristina y Luis-362.jpg';
-	import Form from '../../components/Form.svelte';
+	import Form from '$lib/components/Form.svelte';
 
 	const contact = {
 		text: 'Fill the form to get into contact with me.',

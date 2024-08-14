@@ -3,42 +3,33 @@
     import { inview } from 'svelte-inview';
     import type { ObserverEventDetails, Options } from 'svelte-inview';
 	import { onMount } from 'svelte';
-	import Gallery from '../components/Gallery.svelte';
+	import Gallery from '$lib/components/Gallery.svelte';
+	import { fetchInstagramMedia } from '$lib/api/media';
 
 	let pictures: any[] = [];
     let isLoading = true;
     let error = false;
-    let nextId:string|null = null;
+    let nextId:string|undefined = undefined;
 
-    const getImagesFromInstagram = async (id:string|null) => {
-        let url = 'https://marta.cloud.alesanchez.es/instagram/media';
-        if (id) {
-            url += `?next=${id}`;
-        }
+    let defaultModal = false;
+	let pictureId = "";
 
-        const res = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            }
-        });
-
-         const { data, next } = await res.json();
-       if (Array.isArray(data)) {
-            const mappedData = data.map((picture)=> {
+    async function getImagesFromInstagram(id?: string) {
+        try {
+            const { data, next } = await fetchInstagramMedia(id);
+            const mappedData = data.map((picture) => {
                 return {
                     src: picture.media_url,
                     alt: picture.media_type,
                     id: picture.media_url
-                }
+                };
             });
             pictures = [...pictures, ...mappedData];
             nextId = next;
+        } catch (err) {
+            error = true;
+        } finally {
             isLoading = false;
-        } else {
-          error = true;
-          isLoading = false;
         }
     }
 
@@ -46,9 +37,6 @@
     onMount(async () => {
         getImagesFromInstagram(nextId);
     });
-    
-    let defaultModal = false;
-	let pictureId = "";
 
     const openModal = (id:string) => {
         pictureId = id;
