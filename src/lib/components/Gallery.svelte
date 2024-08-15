@@ -38,7 +38,6 @@
       display: block;
       position: fixed;
       z-index: 10;
-      padding-top: 10px;
       left: 0;
       top: 0;
     	width: 100%;
@@ -102,6 +101,10 @@
     }
 
     @media (min-width: 600px) {
+
+      .modal-open {
+       padding-top: 10px;
+      }
       .modal-content {
       width: 90%;
       height: 94%;
