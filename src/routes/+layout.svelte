@@ -8,11 +8,12 @@
 	import { checkCache, setCache } from '$lib/services/localStorage';
 	import translationStore, { type TranslationKeys } from '$lib/services/translationStore';
 	import './styles.css';
+	import Loader from '../lib/components/Loader.svelte';
 
-	let isLoading:boolean = true;
-    let error:boolean = false;
-	let currentLanguage:string = 'es';
-	let languages:Language[] = [];
+	let isLoading: boolean = true;
+	let error: boolean = false;
+	let currentLanguage: string = 'es';
+	let languages: Language[] = [];
 
 	const menuKeyToUrl = {
 		diary: 'publicaciones',
@@ -32,59 +33,56 @@
 	};
 
 	export async function getTranslationFiles(lang: string): Promise<any> {
-    	const cachedData = checkCache(lang);
-    	if (cachedData) {
+		const cachedData = checkCache(lang);
+		if (cachedData) {
 			$translationStore = cachedData;
-    	    return cachedData;
-    	}
+			return cachedData;
+		}
 
-    	const data = await fetchTranslationFiles(lang);
-    	setCache(lang, data);
-		
+		const data = await fetchTranslationFiles(lang);
+		setCache(lang, data);
+
 		$translationStore = data;
-    	return data;
-	}	
+		return data;
+	}
 
-		
-    onMount(async () => {
-        try {
+	onMount(async () => {
+		try {
 			const data = await fetchTranslationLanguages();
-            languages = data; 
-			currentLanguage = data.find((lang:Language) => lang.isDefault)?.code || 'es';
-        } catch (err) {
-            error = true;
-        } finally {
-            isLoading = false;
-        }
-    });
+			languages = data;
+			currentLanguage = data.find((lang: Language) => lang.isDefault)?.code || 'es';
+		} catch (err) {
+			error = true;
+		} finally {
+			isLoading = false;
+		}
+	});
 
 	$: if (currentLanguage) {
-	 	getTranslationFiles(currentLanguage)
+		getTranslationFiles(currentLanguage);
 	}
 
 	$: if ($translationStore) {
-		menu = Object.entries(menuKeyToUrl).map(([key, value]) =>({
-				title: $translationStore[key as TranslationKeys].title,
-				url: `/${value}`
-			}))
-
+		menu = Object.entries(menuKeyToUrl).map(([key, value]) => ({
+			title: $translationStore[key as TranslationKeys].title,
+			url: `/${value}`
+		}));
 	}
-
 </script>
 
 <div class="app">
 	{#if isLoading}
-		<p>Loading...</p>
+		<Loader />
 	{:else if error}
 		<p>There was an error</p>
 	{:else}
-		<Header {menu} bind:currentLanguage {languages}/>
+		<Header {menu} bind:currentLanguage {languages} />
 
 		<main>
 			<slot />
 		</main>
 
-		<Footer {footerContent}/>
+		<Footer {footerContent} />
 	{/if}
 </div>
 
@@ -94,7 +92,7 @@
 		flex-direction: column;
 		min-height: 100vh;
 	}
-	
+
 	main {
 		flex: 1;
 		display: flex;
@@ -106,12 +104,10 @@
 		box-sizing: border-box;
 	}
 
-	
 	@media (min-width: 600px) {
 		main {
 			padding: 0 3rem;
 		}
-
 	}
 
 	@media (min-width: 905px) {
