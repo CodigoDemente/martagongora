@@ -1,4 +1,3 @@
-
 <script lang="ts">
 </script>
 
@@ -7,9 +6,7 @@
 	<meta name="description" content="Home page with gallery images" />
 </svelte:head>
 
-<section>
- HOME SWEET HOME
-</section>
+<section>HOME SWEET HOME</section>
 
 <style>
 </style>
