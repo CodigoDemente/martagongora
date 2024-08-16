@@ -4,6 +4,13 @@
 	--font-body: 'Segoe UI', Roboto, Oxygen, Ubuntu,
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	--font-mono: 'Fira Mono', monospace;
+	--padding-top-mobile: 40px;
+	--padding-top-desktop: 80px;
+}
+
+@keyframes fadeIn {
+  		0% { opacity: 0; }
+  		100% { opacity: 1; }
 }
 
 body {

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import profileImg from '$lib/images/V_2023_07_01_Cristina y Luis-362.jpg';
 	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
+	import imageStore from '$lib/services/imageStore';
 	import Form from '$lib/components/Form.svelte';
 	import SvelteMarkdown from 'svelte-markdown';
 	let contactText: TranslationSection
@@ -15,10 +16,10 @@
 	<meta name="description" content="Información para contactar" />
 </svelte:head>
 
-<section>
+<section class="effect">
 	<!-- <SvelteMarkdown source={contactText.form.title}/> -->
 	<div>
-		<img src={profileImg} alt='contact-picture' />
+		<img src={$imageStore.contact} alt="foto de una boda" aria-hidden="true" />
 		<Form content={contactText.form} />
 	</div>
 </section>
@@ -27,7 +28,7 @@
 <style lang="scss">
 	@import '../../styles/colors.scss';
 	section {
-		padding-top: 40px;
+		padding-top: var(--padding-top-mobile);
 		display:flex;
 		flex-direction: column;
 		gap: 40px;
@@ -48,14 +49,17 @@
 		max-height: 900px;
 	}
 
-	@media (min-width: 600px) {
-		section {
-			padding-top: 80px;
-		}	
+	.effect {
+		animation: fadeIn 2s;
 	}
 
 	@media (min-width: 905px) {
+		section {
+			padding-top: var(--padding-top-desktop);
+		}
+
 		div {
+			width: 100%;
 			display: flex;
 			flex-direction: row;
 			gap: 5rem;
