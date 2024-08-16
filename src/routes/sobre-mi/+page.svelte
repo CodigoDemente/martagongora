@@ -1,10 +1,8 @@
 <script lang="ts">
-	import img1 from '$lib/images/profile-1.jpeg';
-	import img2 from '$lib/images/profile-2.jpeg';
-	import translationStore from '$lib/services/translationStore';
+	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
 	import SvelteMarkdown from 'svelte-markdown';
 
-	let aboutText:any;
+	let aboutText:TranslationSection;
 
 	$: if ($translationStore) {
 		aboutText = $translationStore.about;
@@ -13,8 +11,8 @@
 </script>
 
 <svelte:head>
-	<title>About me</title>
-	<meta name="description" content="About Marta" />
+	<title>Sobre mí</title>
+	<meta name="description" content="Quién es Marta Gongora" />
 </svelte:head>
 
 <section>
@@ -25,7 +23,6 @@
 		{/each}
 	</div>
 	
-		
 	</div>
 </section>
 
