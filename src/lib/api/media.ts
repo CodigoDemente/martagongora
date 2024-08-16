@@ -24,3 +24,30 @@ export async function fetchInstagramMedia(id?: string): Promise<{ data: {media_u
         throw err;
     }
 }
+
+export async function  fetchBlogImages(): Promise<{ data: {url: string}[] }> {
+    try {
+        const res = await fetch('https://marta.cloud.alesanchez.es/api/graphql', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query: `query Pictures { pictures { code image { url filesize } } }`
+            })
+        });
+
+        const { data } = await res.json();
+        return data;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
+// PREGUNTAS ALE 
+// se puede hacer llamada api normal ? 
+// traducciones, eliminar diary y pasarlo a gallery ?
+// para la home, va a subir las imagenes al cms ? 
+// submit form endpoint ?
+// repasar project tareas
