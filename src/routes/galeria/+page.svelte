@@ -1,120 +1,67 @@
-
 <script lang="ts">
-	import Gallery from "$lib/components/Gallery.svelte";
-	import Grid from "$lib/components/Grid.svelte";
-	import type { GridBlockData } from "../../types/gridblock";
-	import img1 from '$lib/images/V_2023_03_11_Isabel y JoseÌ_alta-723.jpg';
-	import img2 from '$lib/images/V_2023_07_01_Cristina y Luis-362.jpg';
-	import img3 from '$lib/images/H_2023_03_11_Isabel y JoseÌ_alta-367.jpg';
-	import img4 from '$lib/images/H_2023_03_11_Isabel y JoseÌ_alta-688.jpg';
-	
+	import { fetchInstagramMedia } from '$lib/api/media';
+	import Gallery from '$lib/components/Gallery.svelte';
+	import Grid from '$lib/components/Grid.svelte';
+	import { onMount } from 'svelte';
+	import { inview } from 'svelte-inview';
+	import type { Image } from '../../types/image';
+	import Loader from '$lib/components/Loader.svelte';
 
-	let pictures : GridBlockData[] = [
-		{
-			images: [
-				{
-					src: img1,
-					alt: 'Kitten 1',
-					id: "1"
-				},
-				{
-					src: img2,
-					alt: 'Kitten 2',
-					id: "2"
-				},
-				{
-					src: img1,
-					alt: 'Kitten 1',
-					id: "12"
-				},
-			]
-		},
-		{
-			images: [
-				{
-					src: img3,
-					alt: 'Kitten 3',
-					id: "3"
-				},
-				{
-					src: img4,
-					alt: 'Kitten 4',
-					id: "4"
-				}
-			]
-		},
-		{
-			images: [
-				{
-					src: img3,
-					alt: 'Kitten 3',
-					id: "5"
-				},
-				{
-					src: img1,
-					alt: 'Kitten 1',
-					id: "6"
-				},
-				{
-					src: img2,
-					alt: 'Kitten 2',
-					id: "7"
-				},
-				{
-					src: img4,
-					alt: 'Kitten 4',
-					id: "8"
-				}
-			]
-		},
-			{
-			images: [
-				{
-					src: img1,
-					alt: 'Kitten 1',
-					id: "14"
-				},
-				{
-					src: img2,
-					alt: 'Kitten 2',
-					id: "16"
-				}
-			]
-		},
-		{
-			images: [
-				{
-					src: img3,
-					alt: 'Kitten 3',
-					id: "9"
-				}
-			]
-		}
+	let pictures: Image[] = [];
+	let isLoading = true;
+	let error = false;
+	let moreImages = true;
+	let nextId: string | undefined = undefined;
 
-	]
-	
-	const allImages = pictures.map((picture) => picture.images).flat();
 	let defaultModal = false;
-	let pictureId = "";
+	let pictureId = '';
 
+	async function getImagesFromInstagram(id?: string) {
+		isLoading = true;
+		try {
+			const { data, next } = await fetchInstagramMedia(id);
+			moreImages = !!next;
+  			const mappedData = data.map((picture) => {
+                return {
+                    src: picture.media_url,
+                    alt: picture.media_type,
+                    id: picture.media_url
+                };
+            });
+            pictures = [...pictures, ...mappedData];
+            nextId = next;
+		} catch (err) {
+			error = true;
+		} finally {
+			isLoading = false;
+		}
+	}
+
+	onMount(async () => {
+		getImagesFromInstagram(nextId);
+	});
 </script>
 
 <svelte:head>
-	<title>Gallery</title>
-	<meta name="description" content="Gallery images" />
+	<title>Galería</title>
+	<meta name="description" content="Feed instagram" />
 </svelte:head>
 
 <section>
-	<Grid bind:pictureId bind:defaultModal pictures={pictures} />
-	<Gallery gallery={allImages} bind:defaultModal bind:pictureId />
+	<Grid bind:pictureId bind:defaultModal {pictures} />
+	<Gallery gallery={pictures} bind:defaultModal bind:pictureId />
+
+	{#if !isLoading && !error && moreImages}
+		<div
+			use:inview={{ threshold: 0.5 }}
+			on:inview_enter={(event) => getImagesFromInstagram(nextId)}
+		></div>
+	{/if}
+
+	{#if isLoading}
+		<Loader />
+	{/if}
 </section>
 
 <style>
-	section {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 100%;
-	}
-
 </style>

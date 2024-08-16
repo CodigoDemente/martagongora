@@ -6,49 +6,56 @@
 	import type { Language } from '../types/language';
 	import { fetchTranslationFiles, fetchTranslationLanguages } from '$lib/api/translations';
 	import { checkCache, setCache } from '$lib/services/localStorage';
-	import translationStore, { type TranslationKeys } from '$lib/services/translationStore';
+	import translationStore, { type TranslationKeys, type TranslationSection } from '$lib/services/translationStore';
+	import imageStore, { mappedImages } from '$lib/services/imageStore';
 	import './styles.css';
 	import Loader from '../lib/components/Loader.svelte';
+	import { fetchBlogImages } from '$lib/api/media';
 
 	let isLoading: boolean = true;
 	let error: boolean = false;
 	let currentLanguage: string = 'es';
 	let languages: Language[] = [];
+	let menu: MenuEntry[];
+
+	const oneDayCache = 24 * 60 * 60 * 1000; // One day in milliseconds
+	const fiftyMinCache = 50 * 60 * 1000; // 3,000,000 milliseconds
 
 	const menuKeyToUrl = {
-		diary: 'publicaciones',
 		gallery: 'galeria',
 		about: 'sobre-mi',
 		contact: 'contacto'
 	};
 
-	let menu: MenuEntry[];
 
-	let footerContent = {
-		links: [
-			{ title: 'Questions', url: '/questions' },
-			{ title: 'Contact', url: '/contact' }
-		],
-		text: 'Marta Gongora Fotografía ©  Todos los derechos reservados/All rights reserved.'
-	};
-
-	export async function getTranslationFiles(lang: string): Promise<any> {
-		const cachedData = checkCache(lang);
+	async function getTranslationFiles(lang: string): Promise<any> {
+		const cachedData = checkCache(lang, oneDayCache);
 		if (cachedData) {
-			$translationStore = cachedData;
-			return cachedData;
+			return $translationStore = cachedData;
 		}
 
 		const data = await fetchTranslationFiles(lang);
 		setCache(lang, data);
 
-		$translationStore = data;
-		return data;
+		return $translationStore = data;
+	}
+
+	async function getImagesFiles(): Promise<any> {
+		const cachedData = checkCache('images', fiftyMinCache);
+		if (cachedData) {
+			return $imageStore = cachedData;
+		}
+		const data = await fetchBlogImages();
+		const mappedData = mappedImages(data);
+		setCache('images', mappedData);
+
+		return $imageStore = mappedData
 	}
 
 	onMount(async () => {
 		try {
 			const data = await fetchTranslationLanguages();
+			await getImagesFiles();
 			languages = data;
 			currentLanguage = data.find((lang: Language) => lang.isDefault)?.code || 'es';
 		} catch (err) {
@@ -82,7 +89,7 @@
 			<slot />
 		</main>
 
-		<Footer {footerContent} />
+		<Footer footerContent={$translationStore.footer} />
 	{/if}
 </div>
 

@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 
 export type TranslationKeys = 'about' | 'contact' | 'diary' | 'footer' | 'gallery';
 
-type TranslationSection = {
+export type TranslationSection = {
      [key: string]: string;
 };
     

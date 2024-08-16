@@ -24,3 +24,24 @@ export async function fetchInstagramMedia(id?: string): Promise<{ data: {media_u
         throw err;
     }
 }
+
+export async function fetchBlogImages(): Promise<ImageInput> {
+    try {
+        const res = await fetch('https://marta.cloud.alesanchez.es/api/graphql', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query: `query Pictures { pictures { code image { url filesize } } }`
+            })
+        });
+
+        const { data } = await res.json();
+        return data;
+    } catch (err) {
+        console.error(err);
+        throw err;
+    }
+}
