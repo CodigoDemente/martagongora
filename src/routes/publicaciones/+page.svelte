@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { inview } from 'svelte-inview';
-	import { onMount } from 'svelte';
-	import Gallery from '$lib/components/Gallery.svelte';
 	import { fetchInstagramMedia } from '$lib/api/media';
+	import Gallery from '$lib/components/Gallery.svelte';
+	import { onMount } from 'svelte';
+	import { inview } from 'svelte-inview';
 	import Grid from '../../lib/components/Grid.svelte';
-	import type { GridBlockData } from '../../types/gridblock';
 	import Loader from '../../lib/components/Loader.svelte';
+	import type { Image } from '../../types/image';
 
-	let pictures: any[] = [];
+	let pictures: Image[] = [];
 	let isLoading = true;
 	let error = false;
 	let moreImages = true;
@@ -17,7 +17,8 @@
 	let pictureId = '';
 
 	async function getImagesFromInstagram(id?: string) {
-			try {
+		isLoading = true;
+		try {
 			const { data, next } = await fetchInstagramMedia(id);
 			moreImages = !!next;
   			const mappedData = data.map((picture) => {
