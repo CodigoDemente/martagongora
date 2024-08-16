@@ -1,14 +1,11 @@
 <script lang="ts">
-	export let footerContent: { links: { title: string, url: string }[], text: string };
+	import type { TranslationSection } from "$lib/services/translationStore";
+
+	export let footerContent: TranslationSection;
 </script>
 
 <footer>
-	<div class="links">
-        {#each footerContent.links as { title, url }}
-	        • <a href={url}>{title}</a>
-        {/each}
-	</div>
-	<p>{footerContent.text}</p>
+	<p>{footerContent.copyright}</p>
 </footer>
 
 <style>
