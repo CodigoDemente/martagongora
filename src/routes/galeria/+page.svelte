@@ -59,9 +59,27 @@
 	{/if}
 
 	{#if isLoading}
+	<div class="loader">
 		<Loader />
+	</div>
 	{/if}
 </section>
 
 <style>
+	section {
+		padding-top: var(--padding-top-mobile);
+	}
+
+	.loader {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 50vh;
+	}
+
+	@media (min-width: 905px) {
+		section {
+			padding-top: var(--padding-top-desktop);
+		}
+	}
 </style>

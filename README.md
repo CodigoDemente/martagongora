@@ -22,3 +22,4 @@ We apply the same logic for the general images of the website, we store them in 
 - svelte-inview: for lazy loading on images
 - @sveltejs/adapter-vercel: to upload project on vercel, else not working.
 - sass
+- svelte-markdown

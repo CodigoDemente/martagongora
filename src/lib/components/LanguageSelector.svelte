@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { IconChevronDown, IconChevronUp } from "@tabler/icons-svelte";
 	import type { Language } from "../../types/language";
 
 	export let languages: Language[];
     export let currentLanguage: string;
-  
-    let open: boolean = false;
+
     
     const updateLanguage = (lang: string) => {
         currentLanguage = lang;
@@ -13,50 +11,44 @@
 
 </script>
 
-<div>
-<button on:click={() => open = !open}>
-    {currentLanguage}
-    {#if open}
-    <IconChevronUp size={15} stroke={1} />
-    {:else}
-    <IconChevronDown size={15} stroke={1} />
-    {/if}
-</button>
-<ul class={open ? 'list' : 'hide'}>
-    {#each languages as lang}
-        <li>
-            <button  on:click={() => updateLanguage(lang.code)}>
-            {lang.code}
-            </button>
-        </li>
-    {/each}
-</ul>
-</div>
+
+<li>
+{#each languages as lang, i}
+        <button  class={lang.code === currentLanguage ? 'active': ''} on:click={() => updateLanguage(lang.code)}>
+        {lang.code}
+        </button>
+        {#if i < languages.length - 1}
+            <span> | </span>
+        {/if}
+{/each}
+</li>
+
 
 <style lang="scss">
     @import '../../styles/colors.scss';
-    div {
-        position:relative
-    }
 
+    li {
+        position: absolute;
+        bottom: 1rem;
+    }
     button {
         border: none;
         background-color: transparent;
+        text-transform: uppercase;
+        color: $neutral-60;
+        padding: 3px;
+
+        &.active {
+            color: $neutral-80;
+		    text-decoration: underline;
+            text-underline-offset: 3px;
+        }
     }
 
-    .hide {
-        display: none;
-    }
+    @media (min-width: 600px) {
+        li {
+            position: static;
+        }
 
-    .list {
-        border-radius: 6px;
-        padding: 1rem;
-        background-color: $neutral-20;
-        list-style: none;
-        display: block;
-        position: absolute;
-        top: 26px;
-        right: 0;
-    }
-
+	}
 </style>

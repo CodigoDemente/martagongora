@@ -1,9 +1,9 @@
 <script lang="ts">
-	import img1 from '$lib/images/profile-1.jpeg';
-	import img2 from '$lib/images/profile-2.jpeg';
-	import translationStore from '$lib/services/translationStore';
+	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
+	import imageStore from '$lib/services/imageStore';
+	import SvelteMarkdown from 'svelte-markdown';
 
-	let aboutText:any;
+	let aboutText:TranslationSection;
 
 	$: if ($translationStore) {
 		aboutText = $translationStore.about;
@@ -12,33 +12,33 @@
 </script>
 
 <svelte:head>
-	<title>About me</title>
-	<meta name="description" content="About Marta" />
+	<title>Sobre mí</title>
+	<meta name="description" content="Quién es Marta Gongora" />
 </svelte:head>
 
 <section>
-	<div class="horizontal effect">
-		<p>
+	<div class="container effect">
+		<div>
 			{#each Object.values(aboutText.paragraphs) as paragraph}
-				{paragraph}
-				<br>
-				<br>
+			<SvelteMarkdown source={paragraph} />
 			{/each}
-		</p>
+		</div>
+		<img src={$imageStore.about} alt="foto de Marta" aria-hidden="true" />
 	</div>
 </section>
 
 <style lang="scss">
+	@import '../../styles/colors.scss';
 	section {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+		padding-top: var(--padding-top-mobile);
+		color: $neutral-80;
+		text-align: justify;
 	}
-	.horizontal {
+	.container {
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 40px;
 		align-items: center;
 	}
 
@@ -47,40 +47,22 @@
 	}
 
 	.effect {
-		animation: fadeIn 3s;
-	}
-	p {
-		font-size: 1em;
-		line-height: 1.9em;
-		text-align: justify;
+		animation: fadeIn 2s;
 	}	
 
-	@keyframes fadeIn {
-  		0% { opacity: 0; }
-  		100% { opacity: 1; }
-	}
+	@media (min-width: 905px) {
 
-	@media (min-width: 600px) {
-		.horizontal {
-			flex-direction: row-reverse;
-			gap: 80px;
-			align-items: center
+		section {
+			padding-top: var(--padding-top-desktop);
 		}
 
-		img {
-			max-width: 300px;
-		}
-	}
-
-	@media (min-width: 1240px) {
-
-		.horizontal {
-			flex-direction: row-reverse;
+		.container {
+			flex-direction: row;
 			gap: 120px;
-			align-items: end
+			align-items: center;
 		}
 		img {
-			max-width: 450px;
+			max-width: 400px;
 		}
 	}
 </style>

@@ -1,63 +1,47 @@
 <script lang="ts">
 	import profileImg from '$lib/images/V_2023_07_01_Cristina y Luis-362.jpg';
+	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
+	import imageStore from '$lib/services/imageStore';
 	import Form from '$lib/components/Form.svelte';
+	import SvelteMarkdown from 'svelte-markdown';
+	let contactText: TranslationSection
 
-	const contact = {
-		text: 'Fill the form to get into contact with me.',
-		inputs : [
-			{
-				type: 'date',
-				name: 'date',
-				label: 'Date of the marriage'
-			},
-			{
-				type: 'tel',
-				name: 'phone',
-				label: 'Phone number'
-			},
-			{
-				type: 'text',
-				name: 'assistant',
-				label: 'Number of assistant'
-			},
-			{
-				type: 'text',
-				name: 'place',
-				label: 'Place'
-			},
-			{
-				type: 'textarea',
-				name: 'message',
-				label: 'Tell me more about you'
-			}
-		],
-		button: {
-			text: 'Enviar'
-		}
-	};
-
-	const { text, inputs, button } = contact;
+	$: if ($translationStore) {
+		contactText = $translationStore.contact;
+	}
 </script>
 
 <svelte:head>
-	<title>Contact</title>
-	<meta name="description" content="Contact info" />
+	<title>Contacto</title>
+	<meta name="description" content="Información para contactar" />
 </svelte:head>
 
-<section>
-	<img src={profileImg} alt='contact-picture' />
-	<Form {text} {inputs} buttonText={button.text} />
+<section class="effect">
+	<!-- <SvelteMarkdown source={contactText.form.title}/> -->
+	<div>
+		<img src={$imageStore.contact} alt="foto de una boda" aria-hidden="true" />
+		<Form content={contactText.form} />
+	</div>
 </section>
 
 
 <style lang="scss">
 	@import '../../styles/colors.scss';
 	section {
+		padding-top: var(--padding-top-mobile);
 		display:flex;
 		flex-direction: column;
 		gap: 40px;
 		align-items: center;
 	}
+
+	div {
+		display: flex;
+		flex-direction: column-reverse;
+		gap: 5rem;
+		align-items: center;
+	}
+
 	img {
 		display: block;
 		width: 100%;
@@ -65,26 +49,33 @@
 		max-height: 900px;
 	}
 
-	@media (min-width: 600px) {
+	.effect {
+		animation: fadeIn 2s;
+	}
+
+	@media (min-width: 905px) {
 		section {
-			display:flex;
+			padding-top: var(--padding-top-desktop);
+		}
+
+		div {
+			width: 100%;
+			display: flex;
 			flex-direction: row;
-			gap: 120px;
-			align-items: center;
-		}	
+			gap: 5rem;
+			align-items: start;
+		}
 		img {
 			display: block;
-			width: 50%;
+			width: 40%;
 			object-fit: cover;
-			max-height: 900px;
 		}
 	}
+
 	@media (min-width: 1240px) {
-		section {
-			display:flex;
-			flex-direction: row;
-			gap: 120px;
-			align-items: center;
+		img {
+			width: 50%;
 		}
 	}
+	
 </style>
