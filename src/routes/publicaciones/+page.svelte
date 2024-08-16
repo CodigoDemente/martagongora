@@ -1,17 +1,13 @@
 <script lang="ts">
-	import { inview } from 'svelte-inview';
-	import { onMount } from 'svelte';
-	import Gallery from '$lib/components/Gallery.svelte';
 	import { fetchInstagramMedia } from '$lib/api/media';
+	import Gallery from '$lib/components/Gallery.svelte';
+	import { onMount } from 'svelte';
+	import { inview } from 'svelte-inview';
 	import Grid from '../../lib/components/Grid.svelte';
-	import type { GridBlockData } from '../../types/gridblock';
 	import Loader from '../../lib/components/Loader.svelte';
+	import type { Image } from '../../types/image';
 
-	let pictures: GridBlockData[] = [
-		{
-			images: []
-		}
-	];
+	let pictures: Image[] = [];
 	let isLoading = true;
 	let error = false;
 	let moreImages = true;
@@ -24,34 +20,16 @@
 		isLoading = true;
 		try {
 			const { data, next } = await fetchInstagramMedia(id);
-
 			moreImages = !!next;
-
-			data.forEach((picture) => {
-				if (pictures.at(-1)!.images.length < 3) {
-					pictures.at(-1)!.images.push({
-						src: picture.media_url,
-						alt: picture.media_type,
-						id: picture.media_url
-					});
-					pictures = pictures;
-				} else {
-					pictures = [
-						...pictures,
-						{
-							images: [
-								{
-									src: picture.media_url,
-									alt: picture.media_type,
-									id: picture.media_url
-								}
-							]
-						}
-					];
-				}
-			});
-
-			nextId = next;
+  			const mappedData = data.map((picture) => {
+                return {
+                    src: picture.media_url,
+                    alt: picture.media_type,
+                    id: picture.media_url
+                };
+            });
+            pictures = [...pictures, ...mappedData];
+            nextId = next;
 		} catch (err) {
 			error = true;
 		} finally {
@@ -59,10 +37,8 @@
 		}
 	}
 
-	$: allImages = pictures.map((picture) => picture.images).flat();
-
 	onMount(async () => {
-		getImagesFromInstagram(undefined);
+		getImagesFromInstagram(nextId);
 	});
 </script>
 
@@ -73,7 +49,7 @@
 
 <section>
 	<Grid bind:pictureId bind:defaultModal {pictures} />
-	<Gallery gallery={allImages} bind:defaultModal bind:pictureId />
+	<Gallery gallery={pictures} bind:defaultModal bind:pictureId />
 
 	{#if !isLoading && !error && moreImages}
 		<div
