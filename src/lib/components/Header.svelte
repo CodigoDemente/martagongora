@@ -26,7 +26,7 @@
 
 <header>
 	<nav>
-		<a class="logo" href="/">
+		<a on:click={() => handleClickMenu('/')} class="logo" href="/">
 			<img src={logo} alt="SvelteKit" />
 		</a>
 		<ul class={open ? 'list-open' : 'list'}>
