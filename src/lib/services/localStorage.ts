@@ -1,14 +1,13 @@
 import { browser } from "$app/environment";
 
-const oneDay = 24 * 60 * 60 * 1000; // One day in milliseconds
 
-export function checkCache(lang: string): any | null {
-    const cacheKey = `translation_${lang}`;
+export function checkCache(key: string, duration: number): any | null {
+    const cacheKey = `${key}`;
     const cachedData = browser && window.localStorage.getItem(cacheKey);
 
     if (cachedData) {
         const { data, timestamp } = JSON.parse(cachedData);
-        const isCacheValid = (Date.now() - timestamp) < oneDay;
+        const isCacheValid = (Date.now() - timestamp) < duration;
 
         if (isCacheValid) {
             return data;
@@ -17,8 +16,8 @@ export function checkCache(lang: string): any | null {
     return null;
 }
 
-export function setCache(lang: string, data: any): void {
-    const cacheKey = `translation_${lang}`;
+export function setCache(key: string, data: any): void {
+    const cacheKey = `${key}`;
     if (browser) {
         window.localStorage.setItem(cacheKey, JSON.stringify({ data, timestamp: Date.now() }));
     }
