@@ -4,26 +4,35 @@
 	import type { MenuEntry } from '../../types/menu';
 	import { IconMenu, IconX } from '@tabler/icons-svelte';
 	import LanguageSelector from './LanguageSelector.svelte';
+	import { onMount } from 'svelte';
 	
 	export let menu : MenuEntry[];
 	export let languages : Language[];
 	export let currentLanguage : string;
+	let active = "";
 	
 	$: open = false;
+
+	onMount(() => {
+		active = window.location.pathname;
+	})
+
+	const handleClickMenu = (url:string) => {
+		active = url;
+		open = false
+	}
+  
 </script>
 
 <header>
-	<div class="corner">
-		<a href="/">
+	<nav>
+		<a class="logo" href="/">
 			<img src={logo} alt="SvelteKit" />
 		</a>
-	</div>
-
-	<nav class={open ? 'nav-open' : 'nav'}>
-		<ul>
+		<ul class={open ? 'list-open' : 'list'}>
 			{#each menu as { title, url }}
 			<li>
-				<a on:click={() => open = false} href={url}>{title}</a>
+				<a class={active === url? 'active': ''} on:click={() => handleClickMenu(url)} href={url}>{title}</a>
 			</li>
 			{/each}
 			<LanguageSelector bind:currentLanguage {languages} />
@@ -39,53 +48,44 @@
 	</button>
 </header>
 
-<style>
+<style lang="scss">
+	@import '../../styles/colors.scss';
 	header {
+		height: 80px;
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 2rem;
-		padding-top: 1.5rem;
-		padding-bottom: 4rem;
+		justify-content: center;
 	}
 
-	.corner img {
+	img {
 		width: 12rem;
 	}
 
-	nav {
+	.list {
 		display: none;
 	}
 
-	.nav-open {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 100%;
-	}
-
-
-	ul {
+	.list-open {
 		position: fixed;
 		top: 0;
-		gap: 2rem;
-		padding: 4rem 0;
+		left: 0;
+		padding: 2rem 0 5rem;
+		padding-left: 1rem;
 		margin: 0;
-		height: 3em;
+		height: 12rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
+		align-items: left;
 		list-style: none;
 		background-color: white;
 		width: 100%;
-		height: 30%;
 		z-index: 5;
 	}
 
 	li {
-		position: relative;
 		height: 100%;
 	}
 
@@ -93,22 +93,24 @@
 		display: flex;
 		height: 100%;
 		align-items: center;
-		padding: 0 0.5rem;
-		color: var(--color-text);
+		color: $neutral-80;
 		font-weight: 400;
 		font-size: 1.2rem;
 		letter-spacing: 0.12em;
 		text-decoration: none;
 		transition: color 0.2s linear;
-	}
 
-	a:hover {
-		color: var(--color-theme-1);
-		text-decoration: underline;
+		&:hover, &.active {
+			color: $neutral-90;
+			text-decoration: underline;
+			text-underline-offset: 5px;
+		}
 	}
 
 	button {
 		right: 1rem;
+		top: 1rem;
+		padding: 0;
 		position: absolute;
 		background: none;
 		border: none;
@@ -121,35 +123,34 @@
 
 		header {
 			position: none;
-			display: flex;
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-			padding-inline: 1.5rem;
-			padding-bottom: 3rem;
 		}
 		nav {
 			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 100%;
+			max-width: 34rem;
+			padding: 0;
 		}
-
-		nav a {
-			font-size: 1rem;
-			letter-spacing: 0.12em;
+		ul a {
+			font-size: 0.9rem;
+			letter-spacing: 0.10em;
 			font-weight: 500;
 			text-transform: uppercase;
+			padding: 0;
 		}
 
 		button {
 			display: none;
 		}
 
-		ul {
-			gap: 2rem;
+		.list {
 			padding: 0;
 			margin: 0;
 			height: 3em;
+			gap: 0.8rem;
 			display: flex;
-			justify-content: center;
+			justify-content: end;
 			align-items: center;
 			list-style: none;
 			position: relative;
@@ -161,13 +162,33 @@
 
 	@media (min-width: 905px) {
 
-		ul {
-			gap: 3rem;
+		header {
+				height: 120px;
+		}
+
+		.list {
+			gap: 2rem;
+		}
+
+		nav {
+			max-width: 52.5rem;
+			padding: 0;
 		}
 		nav a {
 			font-size: 1.1rem;
 			letter-spacing: 0.17em;
 			font-weight: 500;
+		}
+	}
+
+	@media (min-width: 1240px) {
+		
+		.list {
+			gap: 3rem;
+		}
+		nav {	
+			max-width: 67.5rem;
+			padding: 0;
 		}
 	}
 </style>

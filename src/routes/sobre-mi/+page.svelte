@@ -2,6 +2,7 @@
 	import img1 from '$lib/images/profile-1.jpeg';
 	import img2 from '$lib/images/profile-2.jpeg';
 	import translationStore from '$lib/services/translationStore';
+	import SvelteMarkdown from 'svelte-markdown';
 
 	let aboutText:any;
 
@@ -18,13 +19,13 @@
 
 <section>
 	<div class="horizontal effect">
-		<p>
-			{#each Object.values(aboutText.paragraphs) as paragraph}
-				{paragraph}
-				<br>
-				<br>
-			{/each}
-		</p>
+	<div>
+		{#each Object.values(aboutText.paragraphs) as paragraph}
+		<SvelteMarkdown source={paragraph} />
+		{/each}
+	</div>
+	
+		
 	</div>
 </section>
 

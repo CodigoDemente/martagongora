@@ -64,6 +64,7 @@
 			isLoading = false;
 		}
 	});
+    
 
 	$: if (currentLanguage) {
 		getTranslationFiles(currentLanguage);
@@ -93,7 +94,7 @@
 	{/if}
 </div>
 
-<style>
+<style lang="scss">
 	.app {
 		display: flex;
 		flex-direction: column;
@@ -106,26 +107,30 @@
 		flex-direction: column;
 		padding: 0 1rem;
 		width: 100%;
-		max-width: 80rem;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}
 
 	@media (min-width: 600px) {
 		main {
-			padding: 0 3rem;
+			max-width: 34rem;
+			padding: 0;
 		}
 	}
 
 	@media (min-width: 905px) {
 		main {
-			padding: 0 5rem;
+			max-width: 52.5rem;
+			padding: 0;
 		}
+	
 	}
 
 	@media (min-width: 1240px) {
 		main {
-			padding: 0 6rem;
+			max-width: 67.5rem;
+			padding: 0;
 		}
 	}
+
 </style>
