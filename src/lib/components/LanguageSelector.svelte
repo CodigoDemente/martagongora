@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { IconChevronDown, IconChevronUp } from "@tabler/icons-svelte";
 	import type { Language } from "../../types/language";
 
 	export let languages: Language[];

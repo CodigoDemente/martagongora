@@ -1,32 +1,34 @@
 <script lang="ts">
+	import { IconMail, IconBrandInstagram } from "@tabler/icons-svelte";
 	import type { TranslationSection } from "$lib/services/translationStore";
 
 	export let footerContent: TranslationSection;
 </script>
 
 <footer>
+	
 	<p>{footerContent.copyright}</p>
+	<div>
+		<a href='https://martagongora.vercel.app/' target="_blank">
+    	    <IconBrandInstagram size={25} stroke={1} />
+		</a>
+		<a href='mailto:contacto@martagongora.com'>
+			<IconMail size={25} stroke={1} />
+		</a>
+	</div>
 </footer>
 
-<style>
+<style lang="scss">
+	@import '../../styles/colors.scss';
     footer {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding: 1.5rem 1rem;
-		background-color: rgb(43, 41, 41);
+		padding: 2rem 0rem;
+		background-color: $neutral-90;
 		color: white;
 		margin-top: 60px;
-		gap: 1rem;
-	}
-
-    .links {
-		display: flex;
-		width: 100%;
-		max-width: 50rem;
-		justify-content: center;
-		align-items: center;
 		gap: 1rem;
 	}
 
@@ -34,25 +36,9 @@
 		margin: 0;
 		font-size: 10px;
 	}
-
-
-    a {
-		font-size: 12px;
-		color: white;
-	}
-
-	a:hover {
-		text-decoration: underline;
-	}
-
     @media (min-width: 600px) {
 		footer {
 			margin-top: 80px;
-			font-size: 12px;
-		}
-
-        a {
-		    font-size: 14px;
 		}
 
 		p {
