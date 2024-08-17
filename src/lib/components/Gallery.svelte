@@ -29,7 +29,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
     .modal {
     	display: none;
     }
@@ -88,7 +88,7 @@
       background: none;
       cursor: pointer;
       padding: 0;
-      
+
       &.next {
         right: 0px;
       }
@@ -104,6 +104,15 @@
 
     @media (min-width: 600px) {
 
+      .buttons {
+        &.next {
+          right: 20px;
+        }
+        &.previous {
+          left: 20px;
+        }
+      }
+
       .modal-open {
        padding-top: 10px;
       }
@@ -116,5 +125,18 @@
       top: 20px;
       }
     }
+
+     @media (min-width: 905px) {
+
+        .buttons {
+        &.next {
+          right: 40px;
+        }
+        &.previous {
+          left: 40px;
+        }
+      }
+
+     }
 
 </style>
