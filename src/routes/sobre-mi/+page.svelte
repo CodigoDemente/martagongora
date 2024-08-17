@@ -1,14 +1,14 @@
 <script lang="ts">
 	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
 	import imageStore from '$lib/services/imageStore';
-	import SvelteMarkdown from 'svelte-markdown';
+	import { marked } from 'marked';
+	import DOMPurify from 'dompurify';
 
-	let aboutText:TranslationSection;
+	let aboutText: TranslationSection;
 
 	$: if ($translationStore) {
 		aboutText = $translationStore.about;
 	}
-
 </script>
 
 <svelte:head>
@@ -19,8 +19,8 @@
 <section>
 	<div class="container effect">
 		<div>
-			{#each Object.values(aboutText.paragraphs) as paragraph}
-			<SvelteMarkdown source={paragraph} />
+			{#each aboutText.paragraphs as paragraph}
+				<p>{@html DOMPurify.sanitize(marked(paragraph, { async: false }))}</p>
 			{/each}
 		</div>
 		<img src={$imageStore.about} alt="foto de Marta" aria-hidden="true" />
@@ -48,10 +48,9 @@
 
 	.effect {
 		animation: fadeIn 2s;
-	}	
+	}
 
 	@media (min-width: 905px) {
-
 		section {
 			padding-top: var(--padding-top-desktop);
 		}
@@ -66,6 +65,3 @@
 		}
 	}
 </style>
-
-
- 

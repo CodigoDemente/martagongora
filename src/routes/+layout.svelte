@@ -6,7 +6,7 @@
 	import type { Language } from '../types/language';
 	import { fetchTranslationFiles, fetchTranslationLanguages } from '$lib/api/translations';
 	import { checkCache, setCache } from '$lib/services/localStorage';
-	import translationStore, { type TranslationKeys, type TranslationSection } from '$lib/services/translationStore';
+	import translationStore, { type TranslationKeys } from '$lib/services/translationStore';
 	import imageStore, { mappedImages } from '$lib/services/imageStore';
 	import './styles.css';
 	import Loader from '../lib/components/Loader.svelte';
@@ -27,29 +27,28 @@
 		contact: 'contacto'
 	};
 
-
 	async function getTranslationFiles(lang: string): Promise<any> {
 		const cachedData = checkCache(lang, oneDayCache);
 		if (cachedData) {
-			return $translationStore = cachedData;
+			return ($translationStore = cachedData);
 		}
 
 		const data = await fetchTranslationFiles(lang);
 		setCache(lang, data);
 
-		return $translationStore = data;
+		return ($translationStore = data);
 	}
 
 	async function getImagesFiles(): Promise<any> {
 		const cachedData = checkCache('images', fiftyMinCache);
 		if (cachedData) {
-			return $imageStore = cachedData;
+			return ($imageStore = cachedData);
 		}
 		const data = await fetchBlogImages();
 		const mappedData = mappedImages(data);
 		setCache('images', mappedData);
 
-		return $imageStore = mappedData
+		return ($imageStore = mappedData);
 	}
 
 	onMount(async () => {
@@ -64,7 +63,6 @@
 			isLoading = false;
 		}
 	});
-    
 
 	$: if (currentLanguage) {
 		getTranslationFiles(currentLanguage);
@@ -123,7 +121,6 @@
 			max-width: 52.5rem;
 			padding: 0;
 		}
-	
 	}
 
 	@media (min-width: 1240px) {
@@ -132,5 +129,4 @@
 			padding: 0;
 		}
 	}
-
 </style>
