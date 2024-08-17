@@ -69,9 +69,9 @@
 		margin-bottom: 40px;
 	}
 	label {
-		font-size: 1rem;
-		font-weight: 500;
-		color: $neutral-90;
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: $neutral-80;
 	}
 
 	input, textarea {
@@ -99,6 +99,7 @@
 		border: 1px solid $black;
 		border-radius: 4px;
 		color: $black;
+		font-style: italic;
 	}
 
 	button:hover {

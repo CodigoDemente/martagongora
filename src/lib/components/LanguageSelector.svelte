@@ -35,6 +35,7 @@
         border: none;
         background-color: transparent;
         text-transform: uppercase;
+        cursor: pointer;
         color: $neutral-60;
         padding: 3px;
 

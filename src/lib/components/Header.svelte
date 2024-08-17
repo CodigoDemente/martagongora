@@ -57,6 +57,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		font-family: var(--font-title);
 	}
 
 	img {
@@ -99,6 +100,7 @@
 		letter-spacing: 0.12em;
 		text-decoration: none;
 		transition: color 0.2s linear;
+		
 
 		&:hover, &.active {
 			color: $neutral-90;
@@ -132,8 +134,8 @@
 			max-width: 34rem;
 			padding: 0;
 		}
-		ul a {
-			font-size: 0.9rem;
+		nav a {
+			font-size: 1rem;
 			letter-spacing: 0.10em;
 			font-weight: 500;
 			text-transform: uppercase;
@@ -175,7 +177,7 @@
 			padding: 0;
 		}
 		nav a {
-			font-size: 1.1rem;
+			font-size: 1.2rem;
 			letter-spacing: 0.17em;
 			font-weight: 500;
 		}
