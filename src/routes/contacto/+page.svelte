@@ -1,10 +1,11 @@
 <script lang="ts">
-	import profileImg from '$lib/images/V_2023_07_01_Cristina y Luis-362.jpg';
 	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
 	import imageStore from '$lib/services/imageStore';
 	import Form from '$lib/components/Form.svelte';
-	import SvelteMarkdown from 'svelte-markdown';
-	let contactText: TranslationSection
+	import { marked } from 'marked';
+	import DOMPurify from 'dompurify';
+
+	let contactText: TranslationSection;
 
 	$: if ($translationStore) {
 		contactText = $translationStore.contact;
@@ -17,19 +18,18 @@
 </svelte:head>
 
 <section class="effect">
-	<!-- <SvelteMarkdown source={contactText.form.title}/> -->
+	<div>{@html DOMPurify.sanitize(marked(contactText.form.title, { async: false }))}</div>
 	<div>
 		<img src={$imageStore.contact} alt="foto de una boda" aria-hidden="true" />
 		<Form content={contactText.form} />
 	</div>
 </section>
 
-
 <style lang="scss">
 	@import '../../styles/colors.scss';
 	section {
 		padding-top: var(--padding-top-mobile);
-		display:flex;
+		display: flex;
 		flex-direction: column;
 		gap: 40px;
 		align-items: center;
@@ -77,5 +77,4 @@
 			width: 50%;
 		}
 	}
-	
 </style>
