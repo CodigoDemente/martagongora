@@ -14,13 +14,13 @@
   		{#if getPositionInArrayById}
       {#if gallery[getIndexInArrayById].id !== gallery[0].id}
        <button on:click={() => (pictureId = gallery[getIndexInArrayById - 1].id)} class="buttons previous">
-        <IconChevronLeft size={45} stroke={1} />
+        <IconChevronLeft size={35} stroke={1} />
       </button>
       {/if}
   		<img class="modal-image" src={gallery[getIndexInArrayById].src} alt={gallery[getIndexInArrayById].alt} />
        {#if gallery[getIndexInArrayById].id !== gallery[gallery.length - 1].id}
        <button on:click={() => (pictureId = gallery[getIndexInArrayById + 1].id)} class="buttons next">
-        <IconChevronRight size={45} stroke={1} />
+        <IconChevronRight size={35} stroke={1} />
       </button>
       {/if}
   		{/if}
@@ -87,6 +87,8 @@
       border: none;
       background: none;
       cursor: pointer;
+      padding: 0;
+      
       &.next {
         right: 0px;
       }
