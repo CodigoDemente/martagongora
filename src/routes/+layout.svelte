@@ -11,6 +11,7 @@
 	import './styles.css';
 	import Loader from '../lib/components/Loader.svelte';
 	import { fetchBlogImages } from '$lib/api/media';
+	import ScrollToTop from '../lib/components/ScrollToTop.svelte';
 
 	let isLoading: boolean = true;
 	let error: boolean = false;
@@ -87,6 +88,8 @@
 		<main>
 			<slot />
 		</main>
+
+		<ScrollToTop />
 
 		<Footer footerContent={$translationStore.footer} />
 	{/if}
