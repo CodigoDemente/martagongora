@@ -36,6 +36,10 @@
 		margin: 0;
 		font-size: 10px;
 	}
+
+	a {
+		color: white;
+	}
 	@media (min-width: 600px) {
 		footer {
 			margin-top: 80px;

@@ -34,9 +34,7 @@
 	};
 
 	function parseMarkdown(value: string) {
-		const renderer = new marked.Renderer();
-		renderer.paragraph = ({ text }: { text: string }) => text + '\n';
-		return DOMPurify.sanitize(marked(value, { renderer, async: false }));
+		return DOMPurify.sanitize(marked.parseInline(value, { async: false }));
 	}
 </script>
 
@@ -99,10 +97,6 @@
 		font-size: 0.9rem;
 		font-weight: 600;
 		color: $neutral-80;
-	}
-
-	label a {
-		color: $neutral-70;
 	}
 
 	input,
