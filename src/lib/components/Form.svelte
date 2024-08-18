@@ -52,7 +52,7 @@
 	{:else}
 		<div>
 			{#if sent}
-				<p class="success">Gracias, estamos en contacto!</p>
+				<p class="success">{content.thanks}</p>
 			{:else}
 				<button type="submit">{content.send}</button>
 			{/if}
