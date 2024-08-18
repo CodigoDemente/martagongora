@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { IconMail, IconBrandInstagram } from "@tabler/icons-svelte";
-	import type { TranslationSection } from "$lib/services/translationStore";
+	import { IconMail, IconBrandInstagram } from '@tabler/icons-svelte';
+	import type { TranslationSection } from '$lib/services/translationStore';
+	import { PUBLIC_INSTAGRAM_URL } from '$env/static/public';
 
 	export let footerContent: TranslationSection;
 </script>
 
 <footer>
-	
 	<p>{footerContent.copyright}</p>
 	<div>
-		<a href='https://martagongora.vercel.app/' target="_blank">
-    	    <IconBrandInstagram size={25} stroke={1} />
+		<a href={PUBLIC_INSTAGRAM_URL} target="_blank">
+			<IconBrandInstagram size={25} stroke={1} />
 		</a>
-		<a href='mailto:contacto@martagongora.com'>
+		<a href="mailto:contacto@martagongora.com">
 			<IconMail size={25} stroke={1} />
 		</a>
 	</div>
@@ -20,7 +20,7 @@
 
 <style lang="scss">
 	@import '../../styles/colors.scss';
-    footer {
+	footer {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -32,17 +32,17 @@
 		gap: 1rem;
 	}
 
-    p {
+	p {
 		margin: 0;
 		font-size: 10px;
 	}
-    @media (min-width: 600px) {
+	@media (min-width: 600px) {
 		footer {
 			margin-top: 80px;
 		}
 
 		p {
-		    font-size: 13px;
+			font-size: 13px;
 		}
 	}
 </style>

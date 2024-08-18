@@ -1,29 +1,25 @@
 <script lang="ts">
 	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
-	import imageStore from '$lib/services/imageStore';
 	import { marked } from 'marked';
 	import DOMPurify from 'dompurify';
 
-	let aboutText: TranslationSection;
+	let termsText: TranslationSection;
 
 	$: if ($translationStore) {
-		aboutText = $translationStore.about;
+		termsText = $translationStore.terms;
 	}
 </script>
 
 <svelte:head>
-	<title>{aboutText.title}</title>
-	<meta name="description" content="Quién es Marta Gongora" />
+	<title>{termsText.title}</title>
+	<meta name="description" content="Términos y condiciones de uso" />
 </svelte:head>
 
 <section>
 	<div class="container effect">
 		<div>
-			{#each aboutText.paragraphs as paragraph}
-				<p class="markdown">{@html DOMPurify.sanitize(marked(paragraph, { async: false }))}</p>
-			{/each}
+			<p>{@html DOMPurify.sanitize(marked(termsText.content, { async: false }))}</p>
 		</div>
-		<img src={$imageStore.about} alt="foto de Marta" aria-hidden="true" />
 	</div>
 </section>
 
@@ -42,14 +38,9 @@
 		align-items: center;
 	}
 
-	img {
-		max-width: 300px;
-	}
-
 	.effect {
 		animation: fadeIn 2s;
 	}
-
 
 	@media (min-width: 905px) {
 		section {
@@ -59,10 +50,7 @@
 		.container {
 			flex-direction: row;
 			gap: 120px;
-			align-items: start;
-		}
-		img {
-			max-width: 400px;
+			align-items: center;
 		}
 	}
 </style>

@@ -13,7 +13,7 @@
 </script>
 
 <svelte:head>
-	<title>Contacto</title>
+	<title>{contactText.title}</title>
 	<meta name="description" content="Información para contactar" />
 </svelte:head>
 
