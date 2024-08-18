@@ -1,7 +1,8 @@
 @import '@fontsource/fira-mono';
 
 :root {
-	--font-body: 'Segoe UI', Roboto, Oxygen, Ubuntu,
+	--font-body: 'Libre Baskerville', serif;
+	--font-title: 'serenity', Roboto, Oxygen, Ubuntu,
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	--font-mono: 'Fira Mono', monospace;
 	--padding-top-mobile: 40px;
@@ -22,15 +23,21 @@ body {
 	font-family: var(--font-body);
 }
 
-h1,
-h2,
-p {
-	font-weight: 400;
+.markdown {
+	margin: 0;
+	font-size: 0.8rem;
+	line-height: 1.5;
+
+	p {
+		margin-block-start: 0;
+	}
+
+	@media (min-width: 600px) {
+		font-size: 1rem;
+		line-height: 2.5;
+	}
 }
 
-p {
-	line-height: 1.5;
-}
 
 a {
 	color: var(--color-theme-1);

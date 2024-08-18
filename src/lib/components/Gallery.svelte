@@ -14,13 +14,13 @@
   		{#if getPositionInArrayById}
       {#if gallery[getIndexInArrayById].id !== gallery[0].id}
        <button on:click={() => (pictureId = gallery[getIndexInArrayById - 1].id)} class="buttons previous">
-        <IconChevronLeft size={45} stroke={1} />
+        <IconChevronLeft size={35} stroke={1} />
       </button>
       {/if}
   		<img class="modal-image" src={gallery[getIndexInArrayById].src} alt={gallery[getIndexInArrayById].alt} />
        {#if gallery[getIndexInArrayById].id !== gallery[gallery.length - 1].id}
        <button on:click={() => (pictureId = gallery[getIndexInArrayById + 1].id)} class="buttons next">
-        <IconChevronRight size={45} stroke={1} />
+        <IconChevronRight size={35} stroke={1} />
       </button>
       {/if}
   		{/if}
@@ -29,7 +29,7 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
     .modal {
     	display: none;
     }
@@ -87,6 +87,8 @@
       border: none;
       background: none;
       cursor: pointer;
+      padding: 0;
+
       &.next {
         right: 0px;
       }
@@ -102,6 +104,15 @@
 
     @media (min-width: 600px) {
 
+      .buttons {
+        &.next {
+          right: 20px;
+        }
+        &.previous {
+          left: 20px;
+        }
+      }
+
       .modal-open {
        padding-top: 10px;
       }
@@ -114,5 +125,18 @@
       top: 20px;
       }
     }
+
+     @media (min-width: 905px) {
+
+        .buttons {
+        &.next {
+          right: 40px;
+        }
+        &.previous {
+          left: 40px;
+        }
+      }
+
+     }
 
 </style>

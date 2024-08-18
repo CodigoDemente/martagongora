@@ -20,7 +20,7 @@
 	<div class="container effect">
 		<div>
 			{#each aboutText.paragraphs as paragraph}
-				<p>{@html DOMPurify.sanitize(marked(paragraph, { async: false }))}</p>
+				<p class="markdown">{@html DOMPurify.sanitize(marked(paragraph, { async: false }))}</p>
 			{/each}
 		</div>
 		<img src={$imageStore.about} alt="foto de Marta" aria-hidden="true" />
@@ -50,6 +50,7 @@
 		animation: fadeIn 2s;
 	}
 
+
 	@media (min-width: 905px) {
 		section {
 			padding-top: var(--padding-top-desktop);
@@ -58,7 +59,7 @@
 		.container {
 			flex-direction: row;
 			gap: 120px;
-			align-items: center;
+			align-items: start;
 		}
 		img {
 			max-width: 400px;

@@ -18,7 +18,7 @@
 </svelte:head>
 
 <section class="effect">
-	<div>{@html DOMPurify.sanitize(marked(contactText.form.title, { async: false }))}</div>
+	<p class="markdown">{@html DOMPurify.sanitize(marked(contactText.form.title, { async: false }))}</p>
 	<div>
 		<img src={$imageStore.contact} alt="foto de una boda" aria-hidden="true" />
 		<Form content={contactText.form} />
@@ -32,7 +32,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 40px;
-		align-items: center;
+		align-items: start;
+		color: $neutral-80;
 	}
 
 	div {

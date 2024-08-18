@@ -24,7 +24,7 @@
 		width: 100%;
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		gap: 0.5rem;
+		gap: 0.2rem;
 	}
 
 	button {
@@ -41,7 +41,7 @@
 		object-fit: cover;
 	}
 
-	@media (max-width: 600px) {
+	@media (min-width: 600px) {
 		.container {
 			gap: 1rem;
 		}
