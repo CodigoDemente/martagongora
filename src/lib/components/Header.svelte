@@ -5,23 +5,22 @@
 	import { IconMenu, IconX } from '@tabler/icons-svelte';
 	import LanguageSelector from './LanguageSelector.svelte';
 	import { onMount } from 'svelte';
-	
-	export let menu : MenuEntry[];
-	export let languages : Language[];
-	export let currentLanguage : string;
-	let active = "";
-	
+
+	export let menu: MenuEntry[];
+	export let languages: Language[];
+	export let currentLanguage: string;
+	let active = '';
+
 	$: open = false;
 
 	onMount(() => {
 		active = window.location.pathname;
-	})
+	});
 
-	const handleClickMenu = (url:string) => {
+	const handleClickMenu = (url: string) => {
 		active = url;
-		open = false
-	}
-  
+		open = false;
+	};
 </script>
 
 <header>
@@ -31,20 +30,22 @@
 		</a>
 		<ul class={open ? 'list-open' : 'list'}>
 			{#each menu as { title, url }}
-			<li>
-				<a class={active === url? 'active': ''} on:click={() => handleClickMenu(url)} href={url}>{title}</a>
-			</li>
+				<li>
+					<a class={active === url ? 'active' : ''} on:click={() => handleClickMenu(url)} href={url}
+						>{title}</a
+					>
+				</li>
 			{/each}
 			<LanguageSelector bind:currentLanguage {languages} />
 		</ul>
 	</nav>
 
-	<button on:click={() => open = !open}>
-	{#if open}
-        <IconX size={25} stroke={1} />
-    {:else}
-        <IconMenu size={25} stroke={1} />
-    {/if}
+	<button on:click={() => (open = !open)}>
+		{#if open}
+			<IconX size={25} stroke={1} />
+		{:else}
+			<IconMenu size={25} stroke={1} />
+		{/if}
 	</button>
 </header>
 
@@ -100,9 +101,9 @@
 		letter-spacing: 0.12em;
 		text-decoration: none;
 		transition: color 0.2s linear;
-		
 
-		&:hover, &.active {
+		&:hover,
+		&.active {
 			color: $neutral-90;
 			text-decoration: underline;
 			text-underline-offset: 5px;
@@ -122,7 +123,6 @@
 	}
 
 	@media (min-width: 600px) {
-
 		header {
 			position: none;
 		}
@@ -136,7 +136,7 @@
 		}
 		nav a {
 			font-size: 1rem;
-			letter-spacing: 0.10em;
+			letter-spacing: 0.1em;
 			font-weight: 500;
 			text-transform: uppercase;
 			padding: 0;
@@ -163,9 +163,8 @@
 	}
 
 	@media (min-width: 905px) {
-
 		header {
-				height: 120px;
+			height: 120px;
 		}
 
 		.list {
@@ -184,11 +183,10 @@
 	}
 
 	@media (min-width: 1240px) {
-		
 		.list {
 			gap: 3rem;
 		}
-		nav {	
+		nav {
 			max-width: 67.5rem;
 			padding: 0;
 		}

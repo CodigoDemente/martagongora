@@ -1,6 +1,5 @@
-export type Image =
-    {
-		src: string;
-		alt: string;
-		id: string;
-	}
+export type Image = {
+	src: string;
+	alt: string;
+	id: string;
+};

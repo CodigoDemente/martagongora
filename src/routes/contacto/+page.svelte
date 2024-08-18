@@ -18,7 +18,9 @@
 </svelte:head>
 
 <section class="effect">
-	<p class="markdown">{@html DOMPurify.sanitize(marked(contactText.form.title, { async: false }))}</p>
+	<p class="markdown">
+		{@html DOMPurify.sanitize(marked(contactText.form.title, { async: false }))}
+	</p>
 	<div>
 		<img src={$imageStore.contact} alt="foto de una boda" aria-hidden="true" />
 		<Form content={contactText.form} />
