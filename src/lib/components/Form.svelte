@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { postContactInfo } from '$lib/api/form';
-	import DOMPurify from 'dompurify';
 	import { marked } from 'marked';
 	import Loader from './Loader.svelte';
+	import DOMPurify from 'dompurify';
 
 	let isLoading = false;
 	let error = false;
@@ -32,12 +32,18 @@
 			isLoading = false;
 		}
 	};
+
+	function parseMarkdown(value: string) {
+		const renderer = new marked.Renderer();
+		renderer.paragraph = ({ text }: { text: string }) => text + '\n';
+		return DOMPurify.sanitize(marked(value, { renderer, async: false }));
+	}
 </script>
 
 <form on:submit={onSubmit}>
 	{#each Object.entries(content.input) as [key, value]}
 		<div class={key === 'terms' ? 'row-input' : 'col-input'}>
-			<label for={key}>{@html DOMPurify.sanitize(marked(value, { async: false }))}</label>
+			<label for={key}>{@html parseMarkdown(value)}</label>
 			{#if key === 'tell_more'}
 				<textarea id={key} name={key}></textarea>
 			{:else if key === 'terms'}
@@ -89,13 +95,13 @@
 		color: $neutral-80;
 		margin-bottom: 40px;
 	}
-	label > :global(p) {
+	label {
 		font-size: 0.9rem;
 		font-weight: 600;
 		color: $neutral-80;
 	}
 
-	label :global(a) {
+	label a {
 		color: $neutral-70;
 	}
 
