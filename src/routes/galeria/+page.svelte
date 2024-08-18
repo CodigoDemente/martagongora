@@ -6,6 +6,8 @@
 	import { inview } from 'svelte-inview';
 	import type { Image } from '../../types/image';
 	import Loader from '$lib/components/Loader.svelte';
+	import type { TranslationSection } from '../../lib/services/translationStore';
+	import translationStore from '../../lib/services/translationStore';
 
 	let pictures: Image[] = [];
 	let isLoading = true;
@@ -16,20 +18,26 @@
 	let defaultModal = false;
 	let pictureId = '';
 
+	let galleryText: TranslationSection;
+
+	$: if ($translationStore) {
+		galleryText = $translationStore.about;
+	}
+
 	async function getImagesFromInstagram(id?: string) {
 		isLoading = true;
 		try {
 			const { data, next } = await fetchInstagramMedia(id);
 			moreImages = !!next;
-  			const mappedData = data.map((picture) => {
-                return {
-                    src: picture.media_url,
-                    alt: picture.media_type,
-                    id: picture.media_url
-                };
-            });
-            pictures = [...pictures, ...mappedData];
-            nextId = next;
+			const mappedData = data.map((picture) => {
+				return {
+					src: picture.media_url,
+					alt: picture.media_type,
+					id: picture.media_url
+				};
+			});
+			pictures = [...pictures, ...mappedData];
+			nextId = next;
 		} catch (err) {
 			error = true;
 		} finally {
@@ -43,7 +51,7 @@
 </script>
 
 <svelte:head>
-	<title>Galería</title>
+	<title>{galleryText.title}</title>
 	<meta name="description" content="Feed instagram" />
 </svelte:head>
 
@@ -59,9 +67,9 @@
 	{/if}
 
 	{#if isLoading}
-	<div class="loader">
-		<Loader />
-	</div>
+		<div class="loader">
+			<Loader />
+		</div>
 	{/if}
 </section>
 
