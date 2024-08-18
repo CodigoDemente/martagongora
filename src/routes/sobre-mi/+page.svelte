@@ -50,7 +50,6 @@
 		animation: fadeIn 2s;
 	}
 
-
 	@media (min-width: 905px) {
 		section {
 			padding-top: var(--padding-top-desktop);
