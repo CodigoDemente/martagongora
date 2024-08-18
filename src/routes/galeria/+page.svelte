@@ -67,7 +67,7 @@
 	{/if}
 
 	{#if isLoading}
-		<div class="loader">
+		<div class="loader" class:loader-bottom={pictures.length}>
 			<Loader />
 		</div>
 	{/if}
@@ -83,6 +83,10 @@
 		justify-content: center;
 		align-items: center;
 		height: 50vh;
+	}
+
+	.loader-bottom {
+		height: 10vh;
 	}
 
 	@media (min-width: 905px) {
