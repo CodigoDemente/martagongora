@@ -126,9 +126,23 @@
 		}
 	}
 
+	@media (min-width: 1024px) {
+		main {
+			max-width: 62rem;
+			padding: 0;
+		}
+	}
+
 	@media (min-width: 1240px) {
 		main {
-			max-width: 67.5rem;
+			max-width: 72rem;
+			padding: 0;
+		}
+	}
+
+	@media (min-width: 1480px) {
+		main {
+			max-width: 90rem;
 			padding: 0;
 		}
 	}
