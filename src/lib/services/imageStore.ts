@@ -1,11 +1,12 @@
 import { writable } from 'svelte/store';
+import type { ImageObject } from '../../types/imageObject';
 
-type ImageObject = {
-	[key: string]: string;
-};
 export const mappedImages = (data: ImageInput) =>
-	data.pictures.reduce((acc: { [key: string]: string }, picture) => {
-		acc[picture.code] = picture.image.url;
+	data.pictures.reduce((acc: ImageObject, picture) => {
+		acc[picture.code] = {
+			src: picture.image.url,
+			alt: picture.alt
+		};
 		return acc;
 	}, {});
 

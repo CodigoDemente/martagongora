@@ -38,7 +38,7 @@ export async function fetchBlogImages(): Promise<ImageInput> {
 				Accept: 'application/json'
 			},
 			body: JSON.stringify({
-				query: `query Pictures { pictures { code image { url filesize } } }`
+				query: `query Pictures { pictures { code alt image { url filesize } } }`
 			})
 		});
 
