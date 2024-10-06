@@ -1,27 +1,25 @@
-import { fetchBlogImages } from '$lib/api/media';
-import { writable } from 'svelte/store';
-import { checkCache, setCache } from './localStorage';
+import { fetchBlogImages } from "$lib/api/media";
+import type { ImageObject } from "../../types/imageObject";
+import { checkCache, setCache } from "./localStorage";
 
-type ImageObject = {
-	[key: string]: string;
-};
-
-const fiftyMinCache = 50 * 60 * 1000; // 3,000,000 milliseconds
+const fiftyMinCache = 50 * 60 * 1000; // 50 minutes in milliseconds
 
 const mappedImages = (data: ImageInput) =>
-	data.pictures.reduce((acc: { [key: string]: string }, picture) => {
-		acc[picture.code] = picture.image.url;
+	data.pictures.reduce((acc: ImageObject, picture) => {
+		acc[picture.code] = {
+			src: picture.image.url,
+			alt: picture.alt
+		};
 		return acc;
 	}, {});
 
 export async function getImagesFiles() {
-		const cachedData = checkCache('images', fiftyMinCache);
-		if (cachedData) {
-			return cachedData
-		}
-		const data = await fetchBlogImages();
-		const mappedData = mappedImages(data);
-		setCache('images', mappedData);
-
-		return mappedData
+	const cachedData = checkCache('images', fiftyMinCache);
+	if (cachedData) {
+		return cachedData
+	}
+	const data = await fetchBlogImages();
+	const mappedData = mappedImages(data);
+	setCache('images', mappedData);
+	return mappedData
 }

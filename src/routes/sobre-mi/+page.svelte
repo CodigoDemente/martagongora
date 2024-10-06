@@ -3,6 +3,7 @@
 	import imageStore from '$lib/services/imageStore';
 	import { marked } from 'marked';
 	import DOMPurify from 'dompurify';
+	import { getAltText } from '../../lib/helpers/imageHelper';
 
 	let aboutText: TranslationSection;
 
@@ -23,7 +24,11 @@
 				<p class="markdown">{@html DOMPurify.sanitize(marked(paragraph, { async: false }))}</p>
 			{/each}
 		</div>
-		<img src={$imageStore.about} alt="foto de Marta" aria-hidden="true" />
+		<img
+			src={$imageStore.about.alt}
+			alt={getAltText($imageStore.about.alt, aboutText)}
+			aria-hidden="true"
+		/>
 	</div>
 </section>
 

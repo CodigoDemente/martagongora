@@ -1,20 +1,26 @@
 <script lang="ts">
-	import type { TranslationSection } from '$lib/services/translationStore.js';
+	import imageStore from '$lib/services/imageStore';
+	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
+	import DOMPurify from 'dompurify';
+	import { marked } from 'marked';
+	import { getAltText } from '$lib/helpers/imageHelper';
+	import type { ImageObject } from '../types/imageObject';
 
-	export let data;
+	let homeText: TranslationSection;
+	let homeImages: ImageObject = {};
 
-	let homeText: TranslationSection = data.translations.home;
-	let homeImages: { [key: string]: string } = {};
-
-	// get array in the backend is possible
-	Object.entries(data.images).forEach(([key, value]) => {
-		if (key.includes('home')) {
-			const keyNum = key && key.split('.')[1];
-			if (typeof value === 'string') {
+	$: if ($translationStore) {
+		homeText = $translationStore.home;
+	}
+	$: if ($imageStore) {
+		// get array in the backend is possible
+		Object.entries($imageStore).forEach(([key, value]) => {
+			if (key.includes('home')) {
+				const keyNum = key && key.split('.')[1];
 				homeImages[keyNum] = value;
 			}
-		}
-	});
+		});
+	}
 </script>
 
 <svelte:head>
@@ -24,59 +30,54 @@
 
 <section>
 	<div class="firstBlock">
-		<img src={homeImages[1]} alt="Image 1" />
-		<p>
-			Habéis soñado largo tiempo con la <br />
-			llegada de este día tan especial, <br />
-			y yo estoy aquí para crear los <br />
-			recuerdos que tendréis de él.
+		<img src={homeImages[1].src} alt={getAltText(homeImages[1].alt, homeText)} />
+		<p class="markdown">
+			{@html DOMPurify.sanitize(marked(homeText.paragraphs[0], { async: false }))}
 		</p>
 	</div>
 	<p class="centeredText">Porque mientras el día ocurre y pasa, las fotos permanecen.</p>
 	<div class="secondBlock">
 		{#each [2, 3, 4] as num}
-			<img src={homeImages[num]} alt="Image {num}" />
+			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
 		{/each}
-		<p>
-			La elegancia y la sencillez de la belleza espontánea<br />
-			son nuestras claves para crear un trabajo atemporal.
+		<p class="markdown">
+			{@html DOMPurify.sanitize(marked(homeText.paragraphs[1], { async: false }))}
 		</p>
 	</div>
 	<div class="thirdBlock">
 		{#each [5, 6] as num}
-			<img src={homeImages[num]} alt="Image {num}" />
+			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
 		{/each}
-		<p>
-			La fotografía nos hace recordar, <br />
-			pero la mirada de un buen fotógrafo también nos hace soñar.
+		<p class="markdown">
+			{@html DOMPurify.sanitize(marked(homeText.paragraphs[2], { async: false }))}
 		</p>
 	</div>
 	<div class="fourthBlock">
 		{#each [7, 8] as num}
-			<img src={homeImages[num]} alt="Image {num}" />
+			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
 		{/each}
 	</div>
 	<div class="fifthBlock">
 		{#each [9, 10] as num}
-			<img src={homeImages[num]} alt="Image {num}" />
+			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
 		{/each}
 	</div>
 	<div class="sixthBlock">
 		<div>
-			<img src={homeImages[11]} alt="Image 11" />
-			<img src={homeImages[11]} alt="Image 13" />
+			<img src={homeImages[11].src} alt={getAltText(homeImages[11].alt, homeText)} />
+			<img src={homeImages[13].src} alt={getAltText(homeImages[13].alt, homeText)} />
 		</div>
-		<img src={homeImages[12]} alt="Image 12" />
+		<img src={homeImages[12].src} alt={getAltText(homeImages[12].alt, homeText)} />
 	</div>
 	<div class="seventhBlock">
-		<img src={homeImages[14]} alt="Image 14" />
+		<img src={homeImages[14].src} alt={getAltText(homeImages[14].alt, homeText)} />
 	</div>
 	<div class="eightBlock">
-		<img src={homeImages[15]} alt="Image 15" />
-		<img src={homeImages[16]} alt="Image 16" />
+		<img src={homeImages[15].src} alt={getAltText(homeImages[15].alt, homeText)} />
+		<img src={homeImages[16].src} alt={getAltText(homeImages[16].alt, homeText)} />
 	</div>
 	<div class="ninthBlock">
-		<img src={homeImages[17]} alt="Image 17" />
+		<img src={homeImages[17].src} alt={getAltText(homeImages[17].alt, homeText)} />
 	</div>
 </section>
 
