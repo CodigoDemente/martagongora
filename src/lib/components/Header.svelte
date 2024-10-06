@@ -133,6 +133,7 @@
 			width: 100%;
 			max-width: 34rem;
 			padding: 0;
+			margin: 0 auto;
 		}
 		nav a {
 			font-size: 1rem;
@@ -167,6 +168,10 @@
 			height: 120px;
 		}
 
+		img {
+			width: 15rem;
+		}
+
 		.list {
 			gap: 2rem;
 		}
@@ -182,12 +187,29 @@
 		}
 	}
 
+	@media (min-width: 1024px) {
+		nav {
+			max-width: 62rem;
+			padding: 0;
+		}
+	}
+
 	@media (min-width: 1240px) {
 		.list {
 			gap: 3rem;
 		}
 		nav {
-			max-width: 67.5rem;
+			max-width: 72rem;
+			padding: 0;
+		}
+	}
+
+	@media (min-width: 1480px) {
+		.list {
+			gap: 4rem;
+		}
+		nav {
+			max-width: 90rem;
 			padding: 0;
 		}
 	}

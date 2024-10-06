@@ -4,6 +4,7 @@
 	import Form from '$lib/components/Form.svelte';
 	import { marked } from 'marked';
 	import DOMPurify from 'dompurify';
+	import { getAltText } from '../../lib/helpers/imageHelper';
 
 	let contactText: TranslationSection;
 
@@ -22,7 +23,11 @@
 		{@html DOMPurify.sanitize(marked(contactText.form.title, { async: false }))}
 	</p>
 	<div>
-		<img src={$imageStore.contact} alt="foto de una boda" aria-hidden="true" />
+		<img
+			src={$imageStore.contact.src}
+			alt={getAltText($imageStore.contact.alt, contactText)}
+			aria-hidden="true"
+		/>
 		<Form content={contactText.form} />
 	</div>
 </section>
