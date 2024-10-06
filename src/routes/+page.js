@@ -7,9 +7,10 @@ export const prerender = true;
 
 export async function load() {
 	const languages = await fetchTranslationLanguages();
-	const currentLanguage = languages.find((lang) => lang.isDefault)?.code || 'es';;
+	const currentLanguage = languages.find((lang) => lang.isDefault)?.code || 'es';
+	const text = await getTranslationFiles(currentLanguage);
 	return {
 		images: await getImagesFiles(),
-		translations: await getTranslationFiles(currentLanguage),
+		translations: text.home
 	};
 }

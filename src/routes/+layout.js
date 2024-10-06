@@ -6,7 +6,6 @@ export const csr = false;
 export const prerender = true;
 
 import { fetchTranslationLanguages } from "$lib/api/translations";
-import { getImagesFiles } from "$lib/services/imageStore";
 import { getTranslationFiles } from "$lib/services/translationStore";
    
 
@@ -15,7 +14,6 @@ export async function load() {
 	const currentLanguage = languages.find((lang) => lang.isDefault)?.code || 'es';;
 	return {
 		languages: languages,
-		images: await getImagesFiles(),
 		translations: await getTranslationFiles(currentLanguage),
         currentLanguage: currentLanguage,
 	};
