@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
 	import imageStore from '$lib/services/imageStore';
 	import Form from '$lib/components/Form.svelte';
@@ -80,4 +80,4 @@
 			width: 50%;
 		}
 	}
-</style>
+</style> -->

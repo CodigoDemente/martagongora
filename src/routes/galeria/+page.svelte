@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { fetchInstagramMedia } from '$lib/api/media';
 	import Gallery from '$lib/components/Gallery.svelte';
 	import Grid from '$lib/components/Grid.svelte';
@@ -94,4 +94,4 @@
 			padding-top: var(--padding-top-desktop);
 		}
 	}
-</style>
+</style> -->

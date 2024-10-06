@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
 	import imageStore from '$lib/services/imageStore';
 	import { marked } from 'marked';
@@ -64,4 +64,4 @@
 			max-width: 400px;
 		}
 	}
-</style>
+</style> -->

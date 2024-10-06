@@ -1,22 +1,20 @@
 <script lang="ts">
-	import imageStore from '$lib/services/imageStore';
-	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
+	import type { TranslationSection } from '$lib/services/translationStore.js';
 
-	let homeText: TranslationSection;
+	export let data;
+
+	let homeText: TranslationSection = data.translations.home;
 	let homeImages: { [key: string]: string } = {};
 
-	$: if ($translationStore) {
-		homeText = $translationStore.home;
-	}
-	$: if ($imageStore) {
-		// get array in the backend is possible
-		Object.entries($imageStore).forEach(([key, value]) => {
-			if (key.includes('home')) {
-				const keyNum = key && key.split('.')[1];
+	// get array in the backend is possible
+	Object.entries(data.images).forEach(([key, value]) => {
+		if (key.includes('home')) {
+			const keyNum = key && key.split('.')[1];
+			if (typeof value === 'string') {
 				homeImages[keyNum] = value;
 			}
-		});
-	}
+		}
+	});
 </script>
 
 <svelte:head>

@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
 	import { marked } from 'marked';
 	import DOMPurify from 'dompurify';
@@ -53,4 +53,4 @@
 			align-items: center;
 		}
 	}
-</style>
+</style> -->
