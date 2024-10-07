@@ -1,24 +1,18 @@
 <script lang="ts">
-	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
 	import { marked } from 'marked';
-	import DOMPurify from 'dompurify';
 
-	let termsText: TranslationSection;
-
-	$: if ($translationStore) {
-		termsText = $translationStore.terms;
-	}
+	export let data;
 </script>
 
 <svelte:head>
-	<title>{termsText.title}</title>
+	<title>{marked(data.text.title)}</title>
 	<meta name="description" content="Términos y condiciones de uso" />
 </svelte:head>
 
 <section>
 	<div class="container effect">
 		<div>
-			<p>{@html DOMPurify.sanitize(marked(termsText.content, { async: false }))}</p>
+			<p>{marked(data.text.content)}</p>
 		</div>
 	</div>
 </section>

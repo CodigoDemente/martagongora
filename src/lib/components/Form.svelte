@@ -2,7 +2,6 @@
 	import { postContactInfo } from '$lib/api/form';
 	import { marked } from 'marked';
 	import Loader from './Loader.svelte';
-	import DOMPurify from 'dompurify';
 
 	let isLoading = false;
 	let error = false;
@@ -34,7 +33,7 @@
 	};
 
 	function parseMarkdown(value: string) {
-		return DOMPurify.sanitize(marked.parseInline(value, { async: false }));
+		return marked.parseInline(value, { async: false });
 	}
 </script>
 

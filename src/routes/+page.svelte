@@ -1,23 +1,19 @@
 <script lang="ts">
-	import imageStore from '$lib/services/imageStore';
-	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
-	import DOMPurify from 'dompurify';
-	import { marked } from 'marked';
 	import { getAltText } from '$lib/helpers/imageHelper';
+	import { type TranslationSection } from '$lib/services/translationStore';
+	import { marked } from 'marked';
 	import type { ImageObject } from '../types/imageObject';
 
-	let homeText: TranslationSection;
+	export let data;
+
+	let homeText: TranslationSection = data.translations;
 	let homeImages: ImageObject = {};
 
-	$: if ($translationStore) {
-		homeText = $translationStore.home;
-	}
-	$: if ($imageStore) {
-		// get array in the backend is possible
-		Object.entries($imageStore).forEach(([key, value]) => {
+	$: if (data.images) {
+		Object.entries(data.images).forEach(([key, value]) => {
 			if (key.includes('home')) {
 				const keyNum = key && key.split('.')[1];
-				homeImages[keyNum] = value;
+				homeImages[keyNum] = value as { src: string; alt: string };
 			}
 		});
 	}
@@ -32,7 +28,7 @@
 	<div class="firstBlock">
 		<img src={homeImages[1].src} alt={getAltText(homeImages[1].alt, homeText)} />
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked(homeText.paragraphs[0], { async: false }))}
+			{marked(homeText.paragraphs[0])}
 		</p>
 	</div>
 	<p class="centeredText">Porque mientras el día ocurre y pasa, las fotos permanecen.</p>
@@ -41,7 +37,7 @@
 			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
 		{/each}
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked(homeText.paragraphs[1], { async: false }))}
+			{marked(homeText.paragraphs[1])}
 		</p>
 	</div>
 	<div class="thirdBlock">
@@ -49,7 +45,7 @@
 			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
 		{/each}
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked(homeText.paragraphs[2], { async: false }))}
+			{homeText.paragraphs[2]}
 		</p>
 	</div>
 	<div class="fourthBlock">
