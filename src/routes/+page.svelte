@@ -1,19 +1,23 @@
 <script lang="ts">
-	import { getAltText } from '$lib/helpers/imageHelper';
-	import { type TranslationSection } from '$lib/services/translationStore';
+	import imageStore from '$lib/services/imageStore';
+	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
+	import DOMPurify from 'dompurify';
 	import { marked } from 'marked';
+	import { getAltText } from '$lib/helpers/imageHelper';
 	import type { ImageObject } from '../types/imageObject';
 
-	export let data;
-
-	let homeText: TranslationSection = data.translations;
+	let homeText: TranslationSection;
 	let homeImages: ImageObject = {};
 
-	$: if (data.images) {
-		Object.entries(data.images).forEach(([key, value]) => {
+	$: if ($translationStore) {
+		homeText = $translationStore.home;
+	}
+	$: if ($imageStore) {
+		// get array in the backend is possible
+		Object.entries($imageStore).forEach(([key, value]) => {
 			if (key.includes('home')) {
 				const keyNum = key && key.split('.')[1];
-				homeImages[keyNum] = value as { src: string; alt: string };
+				homeImages[keyNum] = value;
 			}
 		});
 	}
@@ -28,7 +32,7 @@
 	<div class="firstBlock">
 		<img src={homeImages[1].src} alt={getAltText(homeImages[1].alt, homeText)} />
 		<p class="markdown">
-			{marked(homeText.paragraphs[0])}
+			{@html DOMPurify.sanitize(marked(homeText.paragraphs[0], { async: false }))}
 		</p>
 	</div>
 	<p class="centeredText">Porque mientras el día ocurre y pasa, las fotos permanecen.</p>
@@ -37,7 +41,7 @@
 			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
 		{/each}
 		<p class="markdown">
-			{marked(homeText.paragraphs[1])}
+			{@html DOMPurify.sanitize(marked(homeText.paragraphs[1], { async: false }))}
 		</p>
 	</div>
 	<div class="thirdBlock">
@@ -45,7 +49,7 @@
 			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
 		{/each}
 		<p class="markdown">
-			{homeText.paragraphs[2]}
+			{@html DOMPurify.sanitize(marked(homeText.paragraphs[2], { async: false }))}
 		</p>
 	</div>
 	<div class="fourthBlock">
