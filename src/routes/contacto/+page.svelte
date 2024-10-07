@@ -1,13 +1,16 @@
 <script lang="ts">
+	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
+	import imageStore from '$lib/services/imageStore';
 	import Form from '$lib/components/Form.svelte';
-	import { type TranslationSection } from '$lib/services/translationStore';
 	import { marked } from 'marked';
+	import DOMPurify from 'dompurify';
 	import { getAltText } from '../../lib/helpers/imageHelper';
-	import type { Image } from '../../types/image';
 
-	export let data;
-	let contactImage: Image = data.images;
-	let contactText: TranslationSection = data.translations;
+	let contactText: TranslationSection;
+
+	$: if ($translationStore) {
+		contactText = $translationStore.contact;
+	}
 </script>
 
 <svelte:head>
@@ -17,12 +20,12 @@
 
 <section class="effect">
 	<p class="markdown">
-		{marked(contactText.form.title)}
+		{@html DOMPurify.sanitize(marked(contactText.form.title, { async: false }))}
 	</p>
 	<div>
 		<img
-			src={contactImage.src}
-			alt={getAltText(contactImage.alt, contactText)}
+			src={$imageStore.contact.src}
+			alt={getAltText($imageStore.contact.alt, contactText)}
 			aria-hidden="true"
 		/>
 		<Form content={contactText.form} />

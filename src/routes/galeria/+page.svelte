@@ -2,13 +2,12 @@
 	import { fetchInstagramMedia } from '$lib/api/media';
 	import Gallery from '$lib/components/Gallery.svelte';
 	import Grid from '$lib/components/Grid.svelte';
-	import Loader from '$lib/components/Loader.svelte';
 	import { onMount } from 'svelte';
 	import { inview } from 'svelte-inview';
-	import type { TranslationSection } from '../../lib/services/translationStore';
 	import type { Image } from '../../types/image';
-
-	export let data;
+	import Loader from '$lib/components/Loader.svelte';
+	import type { TranslationSection } from '../../lib/services/translationStore';
+	import translationStore from '../../lib/services/translationStore';
 
 	let pictures: Image[] = [];
 	let isLoading = true;
@@ -19,7 +18,11 @@
 	let defaultModal = false;
 	let pictureId = '';
 
-	let galleryText: TranslationSection = data.translations;
+	let galleryText: TranslationSection;
+
+	$: if ($translationStore) {
+		galleryText = $translationStore.about;
+	}
 
 	async function getImagesFromInstagram(id?: string) {
 		isLoading = true;

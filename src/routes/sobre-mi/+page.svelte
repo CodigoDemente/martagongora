@@ -1,11 +1,15 @@
 <script lang="ts">
-	import { type TranslationSection } from '$lib/services/translationStore';
+	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
+	import imageStore from '$lib/services/imageStore';
+	import { marked } from 'marked';
+	import DOMPurify from 'dompurify';
 	import { getAltText } from '../../lib/helpers/imageHelper';
 
-	export let data;
+	let aboutText: TranslationSection;
 
-	let aboutText: TranslationSection = data.translations;
-	let aboutImage = data.images;
+	$: if ($translationStore) {
+		aboutText = $translationStore.about;
+	}
 </script>
 
 <svelte:head>
@@ -17,10 +21,14 @@
 	<div class="container effect">
 		<div>
 			{#each aboutText.paragraphs as paragraph}
-				<p class="markdown">{paragraph}</p>
+				<p class="markdown">{@html DOMPurify.sanitize(marked(paragraph, { async: false }))}</p>
 			{/each}
 		</div>
-		<img src={aboutImage.src} alt={getAltText(aboutImage.alt, aboutText)} aria-hidden="true" />
+		<img
+			src={$imageStore.about.alt}
+			alt={getAltText($imageStore.about.alt, aboutText)}
+			aria-hidden="true"
+		/>
 	</div>
 </section>
 
