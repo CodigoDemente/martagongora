@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '$lib/images/logo.png';
+	import logo from '$lib/images/logo.webp';
 	import type { Language } from '../../types/language';
 	import type { MenuEntry } from '../../types/menu';
 	import { IconMenu, IconX } from '@tabler/icons-svelte';

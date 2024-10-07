@@ -9,10 +9,10 @@
 <footer>
 	<p>{footerContent.copyright}</p>
 	<div>
-		<a href={PUBLIC_INSTAGRAM_URL} target="_blank">
+		<a aria-label="Ir a la página de Instagram" href={PUBLIC_INSTAGRAM_URL} target="_blank">
 			<IconBrandInstagram size={25} stroke={1} />
 		</a>
-		<a href="mailto:contacto@martagongora.com">
+		<a aria-label="Mandar un correo electrónico" href="mailto:contacto@martagongora.com">
 			<IconMail size={25} stroke={1} />
 		</a>
 	</div>

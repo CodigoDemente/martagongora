@@ -58,7 +58,7 @@
 			{#if sent}
 				<p class="success">{content.thanks}</p>
 			{:else}
-				<button type="submit">{content.send}</button>
+				<button name="form submit" type="submit">{content.send}</button>
 			{/if}
 		</div>
 	{/if}
