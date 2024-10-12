@@ -2,7 +2,7 @@
 	import { t } from '$lib/translations';
 	import logo from '$lib/images/logo.webp';
 	import { locale } from '$lib/translations';
-	import type { MenuEntry } from '../../types/menu';
+	import type { MenuEntry } from '../../types/Menu';
 	import { IconMenu, IconX } from '@tabler/icons-svelte';
 	import LanguageSelector from './LanguageSelector.svelte';
 	import { onMount } from 'svelte';

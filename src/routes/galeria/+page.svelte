@@ -4,7 +4,7 @@
 	import Grid from '$lib/components/Grid.svelte';
 	import { onMount } from 'svelte';
 	import { inview } from 'svelte-inview';
-	import type { InstagramImage } from '../../types/image';
+	import type { InstagramImage } from '../../types/InstagramImage';
 	import Loader from '$lib/components/Loader.svelte';
 	import { t } from '$lib/translations';
 

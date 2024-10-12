@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import type { MenuEntry } from '../types/menu';
+	import type { MenuEntry } from '../types/Menu';
 	import './styles.css';
 	import Loader from '../lib/components/Loader.svelte';
 	import ScrollToTop from '../lib/components/ScrollToTop.svelte';
