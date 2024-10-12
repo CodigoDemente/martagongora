@@ -1,7 +1,28 @@
 import { dev } from '$app/environment';
 import { PUBLIC_BACKEND_URL } from '$env/static/public';
+import type { RequestEvent } from '@sveltejs/kit';
 import type { Config } from 'sveltekit-i18n';
 import I18n from 'sveltekit-i18n';
+
+function getLang(event: RequestEvent): string {
+	let locale = (event.cookies.get('lang') || '').toLowerCase();
+
+	// Get user preferred locale
+	if (!locale) {
+		locale =
+			`${`${event.request.headers.get('accept-language')}`.match(/[a-zA-Z]+?(?=-|_|,|;)/)}`.toLowerCase();
+	}
+
+	// Get defined locales
+	const supportedLocales = locales.get().map((l) => l.toLowerCase());
+
+	// Use default locale if current locale is not supported
+	if (!supportedLocales.includes(locale)) {
+		locale = defaultLocale;
+	}
+
+	return locale;
+}
 
 export const defaultLocale = 'es';
 
@@ -9,6 +30,7 @@ export const config: Config = {
 	log: {
 		level: dev ? 'debug' : 'error'
 	},
+	initLocale: defaultLocale,
 	preprocess: 'none',
 	translations: {
 		en: {
@@ -148,7 +170,7 @@ export const config: Config = {
 	]
 };
 
-export const {
+const {
 	t,
 	loading,
 	locales,
@@ -159,5 +181,18 @@ export const {
 	setLocale,
 	setRoute
 } = new I18n(config);
+
+export {
+	t,
+	loading,
+	locales,
+	locale,
+	translations,
+	loadTranslations,
+	addTranslations,
+	setLocale,
+	setRoute,
+	getLang
+};
 
 loading.subscribe(($loading) => $loading && console.log('Loading translations...'));

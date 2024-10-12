@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { InstagramImage } from '../../types/image';
+	import type { InstagramImage } from '../../types/InstagramImage';
 
 	export let pictures: InstagramImage[];
 	export let defaultModal: boolean;
