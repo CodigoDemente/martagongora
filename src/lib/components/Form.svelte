@@ -2,7 +2,7 @@
 	import { postContactInfo } from '$lib/api/form';
 	import { marked } from 'marked';
 	import Loader from './Loader.svelte';
-	import DOMPurify from 'dompurify';
+	import DOMPurify from 'isomorphic-dompurify';
 
 	let isLoading = false;
 	let error = false;

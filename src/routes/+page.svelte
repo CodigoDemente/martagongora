@@ -1,83 +1,71 @@
 <script lang="ts">
-	import imageStore from '$lib/services/imageStore';
-	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
-	import DOMPurify from 'dompurify';
+	import DOMPurify from 'isomorphic-dompurify';
 	import { marked } from 'marked';
-	import { getAltText } from '$lib/helpers/imageHelper';
-	import type { ImageObject } from '../types/imageObject';
+	import type { PageServerData } from './$types';
+	import { t } from '$lib/translations';
 
-	let homeText: TranslationSection;
-	let homeImages: ImageObject = {};
+	export let data: PageServerData;
 
-	$: if ($translationStore) {
-		homeText = $translationStore.home;
-	}
-	$: if ($imageStore) {
-		// get array in the backend is possible
-		Object.entries($imageStore).forEach(([key, value]) => {
-			if (key.includes('home')) {
-				const keyNum = key && key.split('.')[1];
-				homeImages[keyNum] = value;
-			}
-		});
-	}
+	$: images = data.images;
 </script>
 
 <svelte:head>
-	<title>Home</title>
+	<title>{$t('home').title}</title>
 	<meta name="description" content="Home page with images" />
 </svelte:head>
 
 <section>
 	<div class="firstBlock">
-		<img src={homeImages[1].src} alt={getAltText(homeImages[1].alt, homeText)} />
+		<img src={images[1].src} alt={$t('home')[images[1].alt]} />
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked(homeText.paragraphs[0], { async: false }))}
+			{@html DOMPurify.sanitize(marked($t('home').paragraphs[0], { async: false }))}
 		</p>
 	</div>
-	<p class="centeredText">Porque mientras el día ocurre y pasa, las fotos permanecen.</p>
+	<p class="centeredText">
+		{@html DOMPurify.sanitize(marked($t('home').paragraphs[1], { async: false }))}
+	</p>
 	<div class="secondBlock">
 		{#each [2, 3, 4] as num}
-			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
+			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
 		{/each}
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked(homeText.paragraphs[1], { async: false }))}
+			{@html DOMPurify.sanitize(marked($t('home').paragraphs[2], { async: false }))}
 		</p>
 	</div>
 	<div class="thirdBlock">
 		{#each [5, 6] as num}
-			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
+			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
 		{/each}
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked(homeText.paragraphs[2], { async: false }))}
+			{@html DOMPurify.sanitize(marked($t('home').paragraphs[3], { async: false }))}
 		</p>
 	</div>
 	<div class="fourthBlock">
 		{#each [7, 8] as num}
-			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
+			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
 		{/each}
 	</div>
 	<div class="fifthBlock">
 		{#each [9, 10] as num}
-			<img src={homeImages[num].src} alt={getAltText(homeImages[num].alt, homeText)} />
+			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
 		{/each}
 	</div>
 	<div class="sixthBlock">
 		<div>
-			<img src={homeImages[11].src} alt={getAltText(homeImages[11].alt, homeText)} />
-			<img src={homeImages[13].src} alt={getAltText(homeImages[13].alt, homeText)} />
+			<img src={images[11].src} alt={$t('home')[images[11].alt]} />
+			<img src={images[13].src} alt={$t('home')[images[13].alt]} />
 		</div>
-		<img src={homeImages[12].src} alt={getAltText(homeImages[12].alt, homeText)} />
+		<img src={images[12].src} alt={$t('home')[images[12].alt]} />
 	</div>
 	<div class="seventhBlock">
-		<img src={homeImages[14].src} alt={getAltText(homeImages[14].alt, homeText)} />
+		<img src={images[14].src} alt={$t('home')[images[14].alt]} />
 	</div>
 	<div class="eightBlock">
-		<img src={homeImages[15].src} alt={getAltText(homeImages[15].alt, homeText)} />
-		<img src={homeImages[16].src} alt={getAltText(homeImages[16].alt, homeText)} />
+		<img src={images[15].src} alt={$t('home')[images[15].alt]} />
+		<img src={images[16].src} alt={$t('home')[images[16].alt]} />
 	</div>
 	<div class="ninthBlock">
-		<img src={homeImages[17].src} alt={getAltText(homeImages[17].alt, homeText)} />
+		<img src={images[17].src} alt={$t('home')[images[17].alt]} />
 	</div>
 </section>
 

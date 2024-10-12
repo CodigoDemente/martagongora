@@ -1,23 +1,21 @@
 <script lang="ts">
-	import type { Language } from '../../types/language';
+	import { setLocale, locales } from '$lib/translations';
 
-	export let languages: Language[];
 	export let currentLanguage: string;
 
 	const updateLanguage = (lang: string) => {
-		currentLanguage = lang;
+		setLocale(lang);
+
+		document.cookie = `lang=${lang}`;
 	};
 </script>
 
 <li>
-	{#each languages as lang, i}
-		<button
-			class={lang.code === currentLanguage ? 'active' : ''}
-			on:click={() => updateLanguage(lang.code)}
-		>
-			{lang.code}
+	{#each $locales as lang, i}
+		<button class={lang === currentLanguage ? 'active' : ''} on:click={() => updateLanguage(lang)}>
+			{lang}
 		</button>
-		{#if i < languages.length - 1}
+		{#if i < $locales.length - 1}
 			<span> | </span>
 		{/if}
 	{/each}
