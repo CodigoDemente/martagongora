@@ -1,4 +1,4 @@
 export type MenuEntry = {
-	title: string;
+	key: string;
 	url: string;
 };

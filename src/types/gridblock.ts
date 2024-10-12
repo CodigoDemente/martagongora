@@ -1,5 +1,5 @@
-import type { Image } from './image';
+import type { InstagramImage } from './image';
 
 export type GridBlockData = {
-	images: Image[];
+	images: InstagramImage[];
 };

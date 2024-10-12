@@ -1,14 +1,13 @@
 <script lang="ts">
+	import { t } from '$lib/translations';
 	import logo from '$lib/images/logo.webp';
-	import type { Language } from '../../types/language';
+	import { locale } from '$lib/translations';
 	import type { MenuEntry } from '../../types/menu';
 	import { IconMenu, IconX } from '@tabler/icons-svelte';
 	import LanguageSelector from './LanguageSelector.svelte';
 	import { onMount } from 'svelte';
 
 	export let menu: MenuEntry[];
-	export let languages: Language[];
-	export let currentLanguage: string;
 	let active = '';
 
 	$: open = false;
@@ -29,14 +28,14 @@
 			<img src={logo} alt="SvelteKit" />
 		</a>
 		<ul class={open ? 'list-open' : 'list'}>
-			{#each menu as { title, url }}
+			{#each menu as { key, url }}
 				<li>
 					<a class={active === url ? 'active' : ''} on:click={() => handleClickMenu(url)} href={url}
-						>{title}</a
+						>{$t('menu')[key]}</a
 					>
 				</li>
 			{/each}
-			<LanguageSelector bind:currentLanguage {languages} />
+			<LanguageSelector bind:currentLanguage={$locale} />
 		</ul>
 	</nav>
 

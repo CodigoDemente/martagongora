@@ -1,34 +1,28 @@
 <script lang="ts">
-	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
-	import imageStore from '$lib/services/imageStore';
-	import Form from '$lib/components/Form.svelte';
 	import { marked } from 'marked';
-	import DOMPurify from 'dompurify';
-	import { getAltText } from '../../lib/helpers/imageHelper';
+	import DOMPurify from 'isomorphic-dompurify';
+	import Form from '$lib/components/Form.svelte';
+	import { t, translations } from '$lib/translations';
+	import type { PageData } from './$types';
 
-	let contactText: TranslationSection;
+	export let data: PageData;
 
-	$: if ($translationStore) {
-		contactText = $translationStore.contact;
-	}
+	$: images = data.images;
+	$: locale = data.locale;
 </script>
 
 <svelte:head>
-	<title>{contactText.title}</title>
+	<title>{$t('contact').title}</title>
 	<meta name="description" content="Información para contactar" />
 </svelte:head>
 
 <section class="effect">
 	<p class="markdown">
-		{@html DOMPurify.sanitize(marked(contactText.form.title, { async: false }))}
+		{@html DOMPurify.sanitize(marked($t('contact').form.title, { async: false }))}
 	</p>
 	<div>
-		<img
-			src={$imageStore.contact.src}
-			alt={getAltText($imageStore.contact.alt, contactText)}
-			aria-hidden="true"
-		/>
-		<Form content={contactText.form} />
+		<img src={images.contact.src} alt={$t('contact')[images.contact.alt]} aria-hidden="true" />
+		<Form content={$t('contact').form} />
 	</div>
 </section>
 

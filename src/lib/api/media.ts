@@ -28,24 +28,3 @@ export async function fetchInstagramMedia(
 		throw err;
 	}
 }
-
-export async function fetchBlogImages(): Promise<ImageInput> {
-	try {
-		const res = await fetch(`${PUBLIC_BACKEND_URL}/api/graphql`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json'
-			},
-			body: JSON.stringify({
-				query: `query Pictures { pictures { code alt image { url filesize } } }`
-			})
-		});
-
-		const { data } = await res.json();
-		return data;
-	} catch (err) {
-		console.error(err);
-		throw err;
-	}
-}
