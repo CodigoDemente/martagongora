@@ -61,7 +61,7 @@
 	}
 
 	img {
-		width: 12rem;
+		width: 14rem;
 	}
 
 	.list {
@@ -168,7 +168,7 @@
 		}
 
 		img {
-			width: 15rem;
+			width: 20rem;
 		}
 
 		.list {

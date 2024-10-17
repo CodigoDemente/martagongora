@@ -21,15 +21,12 @@
 			{@html DOMPurify.sanitize(marked($t('home').paragraphs[0], { async: false }))}
 		</p>
 	</div>
-	<p class="centeredText">
-		{@html DOMPurify.sanitize(marked($t('home').paragraphs[1], { async: false }))}
-	</p>
 	<div class="secondBlock">
 		{#each [2, 3, 4] as num}
 			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
 		{/each}
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked($t('home').paragraphs[2], { async: false }))}
+			{@html DOMPurify.sanitize(marked($t('home').paragraphs[1], { async: false }))}
 		</p>
 	</div>
 	<div class="thirdBlock">
@@ -37,13 +34,16 @@
 			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
 		{/each}
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked($t('home').paragraphs[3], { async: false }))}
+			{@html DOMPurify.sanitize(marked($t('home').paragraphs[2], { async: false }))}
 		</p>
 	</div>
 	<div class="fourthBlock">
 		{#each [7, 8] as num}
 			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
 		{/each}
+		<p class="markdown">
+			{@html DOMPurify.sanitize(marked($t('home').paragraphs[3], { async: false }))}
+		</p>
 	</div>
 	<div class="fifthBlock">
 		{#each [9, 10] as num}
@@ -84,8 +84,9 @@
 
 	.firstBlock {
 		display: flex;
-		flex-direction: column-reverse;
+		flex-direction: column;
 		gap: 2rem;
+		padding-bottom: 4rem;
 
 		img {
 			width: 100%;
@@ -142,9 +143,11 @@
 	}
 
 	.fourthBlock {
+		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		padding-bottom: 11rem;
 
 		img {
 			width: 40%;
@@ -152,6 +155,13 @@
 
 		img:nth-child(1) {
 			width: 33%;
+		}
+
+		p {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			text-align: start;
 		}
 	}
 
