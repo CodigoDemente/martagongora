@@ -1,26 +1,17 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import type { MenuEntry } from '../types/menu';
-	import type { Language } from '../types/language';
-	import { fetchTranslationFiles, fetchTranslationLanguages } from '$lib/api/translations';
-	import { checkCache, setCache } from '$lib/services/localStorage';
-	import translationStore, { type TranslationKeys } from '$lib/services/translationStore';
-	import imageStore, { mappedImages } from '$lib/services/imageStore';
+	import type { MenuEntry } from '../types/Menu';
 	import './styles.css';
 	import Loader from '../lib/components/Loader.svelte';
-	import { fetchBlogImages } from '$lib/api/media';
 	import ScrollToTop from '../lib/components/ScrollToTop.svelte';
+	import type { LayoutData } from './$types';
 
-	let isLoading: boolean = true;
+	let isLoading: boolean = false;
 	let error: boolean = false;
-	let currentLanguage: string = 'es';
-	let languages: Language[] = [];
 	let menu: MenuEntry[];
 
-	const oneDayCache = 24 * 60 * 60 * 1000; // One day in milliseconds
-	const fiftyMinCache = 50 * 60 * 1000; // 3,000,000 milliseconds
+	export let data: LayoutData;
 
 	const menuKeyToUrl = {
 		gallery: 'galeria',
@@ -28,53 +19,10 @@
 		contact: 'contacto'
 	};
 
-	async function getTranslationFiles(lang: string): Promise<any> {
-		const cachedData = checkCache(lang, oneDayCache);
-		if (cachedData) {
-			return ($translationStore = cachedData);
-		}
-
-		const data = await fetchTranslationFiles(lang);
-		setCache(lang, data);
-
-		return ($translationStore = data);
-	}
-
-	async function getImagesFiles(): Promise<any> {
-		const cachedData = checkCache('images', fiftyMinCache);
-		if (cachedData) {
-			return ($imageStore = cachedData);
-		}
-		const data = await fetchBlogImages();
-		const mappedData = mappedImages(data);
-		setCache('images', mappedData);
-
-		return ($imageStore = mappedData);
-	}
-
-	onMount(async () => {
-		try {
-			const data = await fetchTranslationLanguages();
-			await getImagesFiles();
-			languages = data;
-			currentLanguage = data.find((lang: Language) => lang.isDefault)?.code || 'es';
-		} catch (err) {
-			error = true;
-		} finally {
-			isLoading = false;
-		}
-	});
-
-	$: if (currentLanguage) {
-		getTranslationFiles(currentLanguage);
-	}
-
-	$: if ($translationStore) {
-		menu = Object.entries(menuKeyToUrl).map(([key, value]) => ({
-			title: $translationStore[key as TranslationKeys].title,
-			url: `/${value}`
-		}));
-	}
+	menu = Object.entries(menuKeyToUrl).map(([key, value]) => ({
+		key,
+		url: `/${value}`
+	}));
 </script>
 
 <div class="app">
@@ -83,7 +31,7 @@
 	{:else if error}
 		<p>There was an error</p>
 	{:else}
-		<Header {menu} bind:currentLanguage {languages} />
+		<Header {menu} />
 
 		<main>
 			<slot />
@@ -91,7 +39,7 @@
 
 		<ScrollToTop />
 
-		<Footer footerContent={$translationStore.footer} />
+		<Footer />
 	{/if}
 </div>
 

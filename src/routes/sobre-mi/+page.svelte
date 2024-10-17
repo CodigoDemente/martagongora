@@ -1,34 +1,27 @@
 <script lang="ts">
-	import translationStore, { type TranslationSection } from '$lib/services/translationStore';
-	import imageStore from '$lib/services/imageStore';
 	import { marked } from 'marked';
-	import DOMPurify from 'dompurify';
-	import { getAltText } from '../../lib/helpers/imageHelper';
+	import DOMPurify from 'isomorphic-dompurify';
+	import { t } from '$lib/translations';
+	import type { PageServerData } from './$types';
 
-	let aboutText: TranslationSection;
+	export let data: PageServerData;
 
-	$: if ($translationStore) {
-		aboutText = $translationStore.about;
-	}
+	$: images = data.images;
 </script>
 
 <svelte:head>
-	<title>{aboutText.title}</title>
+	<title>{$t('about').title}</title>
 	<meta name="description" content="Quién es Marta Gongora" />
 </svelte:head>
 
 <section>
 	<div class="container effect">
 		<div>
-			{#each aboutText.paragraphs as paragraph}
+			{#each $t('about').paragraphs || [] as paragraph}
 				<p class="markdown">{@html DOMPurify.sanitize(marked(paragraph, { async: false }))}</p>
 			{/each}
 		</div>
-		<img
-			src={$imageStore.about.alt}
-			alt={getAltText($imageStore.about.alt, aboutText)}
-			aria-hidden="true"
-		/>
+		<img src={images.about.src} alt={$t('about')[images.about.alt]} aria-hidden="true" />
 	</div>
 </section>
 

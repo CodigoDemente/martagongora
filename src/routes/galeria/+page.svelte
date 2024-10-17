@@ -4,12 +4,11 @@
 	import Grid from '$lib/components/Grid.svelte';
 	import { onMount } from 'svelte';
 	import { inview } from 'svelte-inview';
-	import type { Image } from '../../types/image';
+	import type { InstagramImage } from '../../types/InstagramImage';
 	import Loader from '$lib/components/Loader.svelte';
-	import type { TranslationSection } from '../../lib/services/translationStore';
-	import translationStore from '../../lib/services/translationStore';
+	import { t } from '$lib/translations';
 
-	let pictures: Image[] = [];
+	let pictures: InstagramImage[] = [];
 	let isLoading = true;
 	let error = false;
 	let moreImages = true;
@@ -17,12 +16,6 @@
 
 	let defaultModal = false;
 	let pictureId = '';
-
-	let galleryText: TranslationSection;
-
-	$: if ($translationStore) {
-		galleryText = $translationStore.about;
-	}
 
 	async function getImagesFromInstagram(id?: string) {
 		isLoading = true;
@@ -51,7 +44,7 @@
 </script>
 
 <svelte:head>
-	<title>{galleryText.title}</title>
+	<title>{$t('gallery').title}</title>
 	<meta name="description" content="Feed instagram" />
 </svelte:head>
 

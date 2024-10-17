@@ -4,6 +4,10 @@ import adapter from '@sveltejs/adapter-vercel';
 export default {
 	preprocess: [vitePreprocess()],
 	kit: {
-		adapter: adapter()
+		adapter: adapter({
+			isr: {
+				expiration: 60 * 60 * 24
+			}
+		})
 	}
 };
