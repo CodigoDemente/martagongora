@@ -94,8 +94,8 @@
 		margin-bottom: 40px;
 	}
 	label {
-		font-size: 0.9rem;
-		font-weight: 600;
+		font-size: 0.8rem;
+		font-weight: 400;
 		color: $neutral-80;
 	}
 
@@ -105,7 +105,7 @@
 		border-width: 0px 0px 1px 0px;
 		border-color: $neutral-60;
 		border-radius: 6px;
-		margin-bottom: 10px;
+		margin-bottom: 20px;
 	}
 
 	textarea {
