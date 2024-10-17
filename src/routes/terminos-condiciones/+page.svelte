@@ -5,14 +5,14 @@
 </script>
 
 <svelte:head>
-	<title>{$t('terms.title')}</title>
+	<title>{$t('terms').title}</title>
 	<meta name="description" content="Términos y condiciones de uso" />
 </svelte:head>
 
 <section>
 	<div class="container effect">
 		<div>
-			<p>{@html DOMPurify.sanitize(marked($t('terms.content'), { async: false }))}</p>
+			<p>{@html DOMPurify.sanitize(marked($t('terms').content, { async: false }))}</p>
 		</div>
 	</div>
 </section>
