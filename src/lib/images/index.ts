@@ -21,6 +21,8 @@ export type ImageMap = {
 };
 
 export async function fetchBlogImages(route: string): Promise<ImageMap> {
+	console.log('Fetching images for route', route);
+
 	try {
 		const res = await fetch(`${BACKEND_URL}/api/graphql`, {
 			method: 'POST',
