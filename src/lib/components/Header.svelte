@@ -1,13 +1,10 @@
 <script lang="ts">
 	import { t } from '$lib/translations';
 	import logo from '$lib/images/logo.webp';
-	import { locale } from '$lib/translations';
 	import type { MenuEntry } from '../../types/Menu';
 	import { IconMenu, IconX } from '@tabler/icons-svelte';
 	import LanguageSelector from './LanguageSelector.svelte';
 	import { onMount } from 'svelte';
-
-	export let menu: MenuEntry[];
 	let active = '';
 
 	$: open = false;
@@ -15,6 +12,17 @@
 	onMount(() => {
 		active = window.location.pathname;
 	});
+
+	const menuKeyToUrl = {
+		gallery: 'galeria',
+		about: 'sobre-mi',
+		contact: 'contacto'
+	};
+
+	const menu: MenuEntry[] = Object.entries(menuKeyToUrl).map(([key, value]) => ({
+		key,
+		url: `/${value}`
+	}));
 
 	const handleClickMenu = (url: string) => {
 		active = url;
@@ -35,7 +43,7 @@
 					>
 				</li>
 			{/each}
-			<LanguageSelector bind:currentLanguage={$locale} />
+			<LanguageSelector />
 		</ul>
 	</nav>
 
