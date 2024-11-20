@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import type { MenuEntry } from '../types/Menu';
 	import './styles.css';
 	import Loader from '../lib/components/Loader.svelte';
 	import ScrollToTop from '../lib/components/ScrollToTop.svelte';
@@ -9,20 +8,6 @@
 
 	let isLoading: boolean = false;
 	let error: boolean = false;
-	let menu: MenuEntry[];
-
-	export let data: LayoutData;
-
-	const menuKeyToUrl = {
-		gallery: 'galeria',
-		about: 'sobre-mi',
-		contact: 'contacto'
-	};
-
-	menu = Object.entries(menuKeyToUrl).map(([key, value]) => ({
-		key,
-		url: `/${value}`
-	}));
 </script>
 
 <div class="app">
@@ -31,7 +16,7 @@
 	{:else if error}
 		<p>There was an error</p>
 	{:else}
-		<Header {menu} />
+		<Header />
 
 		<main>
 			<slot />
