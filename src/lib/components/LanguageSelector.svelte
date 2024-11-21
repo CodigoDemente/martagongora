@@ -3,6 +3,8 @@
 
 	const updateLanguage = (lang: string) => {
 		setLocale(lang);
+
+		document.cookie = `lang=${lang}`;
 	};
 </script>
 

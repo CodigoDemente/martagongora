@@ -93,10 +93,6 @@
 		}
 	}
 
-	.centeredText {
-		text-align: center;
-	}
-
 	.secondBlock {
 		display: flex;
 		flex-direction: column;

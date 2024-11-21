@@ -5,17 +5,16 @@ import type { Config } from 'sveltekit-i18n';
 import I18n from 'sveltekit-i18n';
 
 function getLang(event: RequestEvent): string {
-	let locale = (event.cookies.get('lang') || '').toLowerCase();
+	let locale = (event.cookies.get('lang') || defaultLocale).toLowerCase();
 	return locale;
 }
 
-export const defaultLocale = 'es';
+const defaultLocale = 'es';
 
 export const config: Config = {
 	log: {
 		level: dev ? 'debug' : 'error'
 	},
-	initLocale: defaultLocale,
 	preprocess: 'none',
 	translations: {
 		en: {
