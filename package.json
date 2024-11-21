@@ -36,6 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@vercel/speed-insights": "^1.1.0",
 		"isomorphic-dompurify": "^2.16.0",
 		"sveltekit-i18n": "^2.4.2"
 	}

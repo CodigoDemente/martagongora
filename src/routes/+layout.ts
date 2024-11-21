@@ -1,5 +1,8 @@
 import { addTranslations, setLocale, setRoute } from '$lib/translations';
 import type { LayoutLoad } from './$types';
+import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+
+injectSpeedInsights();
 
 export const load: LayoutLoad = async ({ data }) => {
 	const { i18n, translations } = data;
