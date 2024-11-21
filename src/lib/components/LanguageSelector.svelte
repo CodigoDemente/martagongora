@@ -1,18 +1,14 @@
 <script lang="ts">
-	import { setLocale, locales } from '$lib/translations';
-
-	export let currentLanguage: string;
+	import { setLocale, locales, locale } from '$lib/translations';
 
 	const updateLanguage = (lang: string) => {
 		setLocale(lang);
-
-		document.cookie = `lang=${lang}`;
 	};
 </script>
 
 <li>
 	{#each $locales as lang, i}
-		<button class={lang === currentLanguage ? 'active' : ''} on:click={() => updateLanguage(lang)}>
+		<button class={lang === $locale ? 'active' : ''} on:click={() => updateLanguage(lang)}>
 			{lang}
 		</button>
 		{#if i < $locales.length - 1}
