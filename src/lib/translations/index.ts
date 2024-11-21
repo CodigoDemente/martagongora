@@ -15,6 +15,7 @@ export const config: Config = {
 	log: {
 		level: dev ? 'debug' : 'error'
 	},
+	fallbackLocale: defaultLocale,
 	preprocess: 'none',
 	translations: {
 		en: {
