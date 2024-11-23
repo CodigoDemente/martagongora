@@ -1,5 +1,4 @@
-import { loadTranslations, translations, getLang } from '$lib/translations';
-import type { Translations } from '@sveltekit-i18n/base';
+import { loadTranslations, getLang } from '$lib/translations';
 import type { LayoutServerLoad } from './$types';
 
 type OutputData = {
@@ -7,7 +6,6 @@ type OutputData = {
 		locale: string;
 		route: string;
 	};
-	// translations: Translations.SerializedTranslations;
 };
 
 export const load: LayoutServerLoad<OutputData> = async (event) => {
@@ -19,6 +17,5 @@ export const load: LayoutServerLoad<OutputData> = async (event) => {
 
 	return {
 		i18n: { locale, route: pathname }
-		// translations: translations.get() // `translations` on server contain all translations loaded by different clients
 	};
 };
