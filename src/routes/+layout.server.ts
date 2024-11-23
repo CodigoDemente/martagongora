@@ -7,7 +7,7 @@ type OutputData = {
 		locale: string;
 		route: string;
 	};
-	translations: Translations.SerializedTranslations;
+	// translations: Translations.SerializedTranslations;
 };
 
 export const load: LayoutServerLoad<OutputData> = async (event) => {
@@ -18,7 +18,7 @@ export const load: LayoutServerLoad<OutputData> = async (event) => {
 	await loadTranslations(locale, pathname); // keep this just before the `return`
 
 	return {
-		i18n: { locale, route: pathname },
-		translations: translations.get() // `translations` on server contain all translations loaded by different clients
+		i18n: { locale, route: pathname }
+		// translations: translations.get() // `translations` on server contain all translations loaded by different clients
 	};
 };

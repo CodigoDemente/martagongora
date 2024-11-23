@@ -4,7 +4,6 @@
 	import './styles.css';
 	import Loader from '../lib/components/Loader.svelte';
 	import ScrollToTop from '../lib/components/ScrollToTop.svelte';
-	import type { LayoutData } from './$types';
 
 	let isLoading: boolean = false;
 	let error: boolean = false;
