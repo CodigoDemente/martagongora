@@ -1,49 +1,51 @@
 <script lang="ts">
-	import { t } from '$lib/translations';
 	import logo from '$lib/images/logo.webp';
-	import type { MenuEntry } from '../../types/Menu';
 	import { IconMenu, IconX } from '@tabler/icons-svelte';
 	import LanguageSelector from './LanguageSelector.svelte';
 	import { onMount } from 'svelte';
-	let active = '';
 
-	$: open = false;
+	let active: string = '';
 
 	onMount(() => {
-		active = window.location.pathname;
+		active = window.location.pathname.split('/').pop() || '';
 	});
 
-	const menuKeyToUrl = {
+	export let menu: { [key: string]: string };
+	export let activeLang: string;
+	export let defaultLocale: string;
+	export let locales: string[];
+
+	const menuKeyToUrl: { [key: string]: string } = {
 		gallery: 'galeria',
 		about: 'sobre-mi',
 		contact: 'contacto'
 	};
 
-	const menu: MenuEntry[] = Object.entries(menuKeyToUrl).map(([key, value]) => ({
-		key,
-		url: `/${value}`
-	}));
-
-	const handleClickMenu = (url: string) => {
-		active = url;
-		open = false;
-	};
+	$: open = false;
 </script>
 
 <header>
 	<nav>
-		<a on:click={() => handleClickMenu('/')} class="logo" href="/">
+		<a
+			class="logo"
+			on:click={() => (active = '')}
+			href={activeLang === defaultLocale ? '/' : `/${activeLang}`}
+		>
 			<img src={logo} alt="SvelteKit" />
 		</a>
 		<ul class={open ? 'list-open' : 'list'}>
-			{#each menu as { key, url }}
+			{#each Object.entries(menu) as [key, text]}
 				<li>
-					<a class={active === url ? 'active' : ''} on:click={() => handleClickMenu(url)} href={url}
-						>{$t('menu')[key]}</a
+					<a
+						class={active === menuKeyToUrl[key] ? 'active' : ''}
+						on:click={() => (active = menuKeyToUrl[key] || '')}
+						href={activeLang === defaultLocale
+							? `/${menuKeyToUrl[key]}`
+							: `/${activeLang}/${menuKeyToUrl[key]}`}>{text}</a
 					>
 				</li>
 			{/each}
-			<LanguageSelector />
+			<LanguageSelector {activeLang} {defaultLocale} {locales} />
 		</ul>
 	</nav>
 

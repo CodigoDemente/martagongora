@@ -1,31 +1,32 @@
 <script lang="ts">
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import './styles.css';
-	import Loader from '../lib/components/Loader.svelte';
-	import ScrollToTop from '../lib/components/ScrollToTop.svelte';
-	import type { LayoutData } from './$types';
+	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
+	import Loader from '$lib/components/Loader.svelte';
+	import '../styles.css';
+	import type { OutputDataMenu } from '../../types/OutputData';
 
+	export let data: OutputDataMenu;
 	let isLoading: boolean = false;
 	let error: boolean = false;
+
+	$: menu = data.translationsMenu;
+	$: footer = data.translationsFooter;
+	$: activeLang = data.lang;
+	$: defaultLocale = data.defaultLocale;
+	$: locales = data.locales;
 </script>
 
 <div class="app">
-	{#if isLoading}
-		<Loader />
-	{:else if error}
-		<p>There was an error</p>
-	{:else}
-		<Header />
+	<Header {menu} {activeLang} {defaultLocale} {locales} />
 
-		<main>
-			<slot />
-		</main>
+	<main>
+		<slot />
+	</main>
 
-		<ScrollToTop />
+	<ScrollToTop />
 
-		<Footer />
-	{/if}
+	<Footer {footer} />
 </div>
 
 <style lang="scss">
