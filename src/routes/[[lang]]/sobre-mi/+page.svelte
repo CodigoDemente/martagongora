@@ -1,32 +1,32 @@
 <script lang="ts">
 	import { marked } from 'marked';
 	import DOMPurify from 'isomorphic-dompurify';
-	import { t } from '$lib/translations';
-	import type { PageServerData } from './$types';
+	import type { OutputData } from '../../../types/OutputData';
 
-	export let data: PageServerData;
+	export let data: OutputData;
 
 	$: images = data.images;
+	$: text = data.translations;
 </script>
 
 <svelte:head>
-	<title>{$t('about').title}</title>
+	<title>{text.title}</title>
 	<meta name="description" content="Quién es Marta Gongora" />
 </svelte:head>
 
 <section>
 	<div class="container effect">
 		<div>
-			{#each $t('about').paragraphs || [] as paragraph}
+			{#each text.paragraphs || [] as paragraph}
 				<p class="markdown">{@html DOMPurify.sanitize(marked(paragraph, { async: false }))}</p>
 			{/each}
 		</div>
-		<img src={images.about.src} alt={$t('about')[images.about.alt]} aria-hidden="true" />
+		<img src={images.about.src} alt={images.about.alt} aria-hidden="true" />
 	</div>
 </section>
 
 <style lang="scss">
-	@import '../../styles/colors.scss';
+	@import '../../../styles/colors.scss';
 	section {
 		padding-top: var(--padding-top-mobile);
 		color: $neutral-80;

@@ -1,76 +1,76 @@
 <script lang="ts">
 	import DOMPurify from 'isomorphic-dompurify';
 	import { marked } from 'marked';
-	import type { PageServerData } from './$types';
-	import { t } from '$lib/translations';
+	import type { OutputData } from '../../types/OutputData';
 
-	export let data: PageServerData;
+	export let data: OutputData;
 
 	$: images = data.images;
+	$: text = data.translations;
 </script>
 
 <svelte:head>
-	<title>{$t('home').title}</title>
+	<title>{text.title}</title>
 	<meta name="description" content="Home page with images" />
 </svelte:head>
 
 <section>
 	<div class="firstBlock">
-		<img src={images[1].src} alt={$t('home')[images[1].alt]} />
+		<img src={images[1].src} alt={images[1].alt || ''} />
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked($t('home').paragraphs[0], { async: false }))}
+			{@html DOMPurify.sanitize(marked(text.paragraphs[0], { async: false }))}
 		</p>
 	</div>
 	<div class="secondBlock">
 		{#each [2, 3, 4] as num}
-			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
+			<img src={images[num].src} alt={images[num].alt || ''} />
 		{/each}
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked($t('home').paragraphs[1], { async: false }))}
+			{@html DOMPurify.sanitize(marked(text.paragraphs[1], { async: false }))}
 		</p>
 	</div>
 	<div class="thirdBlock">
 		{#each [5, 6] as num}
-			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
+			<img src={images[num].src} alt={images[num].alt || ''} />
 		{/each}
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked($t('home').paragraphs[2], { async: false }))}
+			{@html DOMPurify.sanitize(marked(text.paragraphs[2], { async: false }))}
 		</p>
 	</div>
 	<div class="fourthBlock">
 		{#each [7, 8] as num}
-			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
+			<img src={images[num].src} alt={images[num].alt || ''} />
 		{/each}
 		<p class="markdown">
-			{@html DOMPurify.sanitize(marked($t('home').paragraphs[3], { async: false }))}
+			{@html DOMPurify.sanitize(marked(text.paragraphs[3], { async: false }))}
 		</p>
 	</div>
 	<div class="fifthBlock">
 		{#each [9, 10] as num}
-			<img src={images[num].src} alt={$t('home')[images[num].alt]} />
+			<img src={images[num].src} alt={images[num].alt || ''} />
 		{/each}
 	</div>
 	<div class="sixthBlock">
 		<div>
-			<img src={images[11].src} alt={$t('home')[images[11].alt]} />
-			<img src={images[13].src} alt={$t('home')[images[13].alt]} />
+			<img src={images[11].src} alt={images[11].alt || ''} />
+			<img src={images[13].src} alt={images[13].alt || ''} />
 		</div>
-		<img src={images[12].src} alt={$t('home')[images[12].alt]} />
+		<img src={images[12].src} alt={images[12].alt || ''} />
 	</div>
 	<div class="seventhBlock">
-		<img src={images[14].src} alt={$t('home')[images[14].alt]} />
+		<img src={images[14].src} alt={images[14].alt || ''} />
 	</div>
 	<div class="eightBlock">
-		<img src={images[15].src} alt={$t('home')[images[15].alt]} />
-		<img src={images[16].src} alt={$t('home')[images[16].alt]} />
+		<img src={images[15].src} alt={images[15].alt || ''} />
+		<img src={images[16].src} alt={images[16].alt || ''} />
 	</div>
 	<div class="ninthBlock">
-		<img src={images[17].src} alt={$t('home')[images[17].alt]} />
+		<img src={images[17].src} alt={images[17].alt || ''} />
 	</div>
 </section>
 
 <style lang="scss">
-	@import '../styles/colors.scss';
+	@import '../../styles/colors.scss';
 
 	section {
 		padding-top: var(--padding-top-mobile);

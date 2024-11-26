@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { IconMail, IconBrandInstagram } from '@tabler/icons-svelte';
 	import { PUBLIC_INSTAGRAM_URL } from '$env/static/public';
-	import { t } from '$lib/translations';
+
+	export let footer: { [key: string]: string };
 </script>
 
 <footer>
-	<p>{$t('footer').copyright}</p>
+	<p>{footer.copyright}</p>
 	<div>
 		<a aria-label="Ir a la página de Instagram" href={PUBLIC_INSTAGRAM_URL} target="_blank">
 			<IconBrandInstagram size={25} stroke={1} />

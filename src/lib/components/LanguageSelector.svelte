@@ -1,19 +1,27 @@
 <script lang="ts">
-	import { setLocale, locales, locale } from '$lib/translations';
+	export let activeLang: string;
+	export let defaultLocale: string;
+	export let locales: string[];
 
-	const updateLanguage = (lang: string) => {
-		setLocale(lang);
+	const updateLanguage = (locale: string) => {
+		const { origin, pathname } = window.location;
+		const pathSegments = pathname.split('/').filter(Boolean);
 
-		document.cookie = `lang=${lang}`;
+		let newPath = locale === defaultLocale ? '' : `/${locale}`;
+		if (pathSegments.length > 0 && !(pathSegments.length === 1 && pathSegments[0] === activeLang)) {
+			newPath += `/${pathSegments[pathSegments.length - 1]}`;
+		}
+
+		window.location.href = `${origin}${newPath}`;
 	};
 </script>
 
 <li>
-	{#each $locales as lang, i}
-		<button class={lang === $locale ? 'active' : ''} on:click={() => updateLanguage(lang)}>
-			{lang}
+	{#each locales as locale, i}
+		<button class={locale === activeLang ? 'active' : ''} on:click={() => updateLanguage(locale)}>
+			{locale}
 		</button>
-		{#if i < $locales.length - 1}
+		{#if i < locales.length - 1}
 			<span> | </span>
 		{/if}
 	{/each}

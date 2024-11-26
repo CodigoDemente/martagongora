@@ -2,32 +2,31 @@
 	import { marked } from 'marked';
 	import DOMPurify from 'isomorphic-dompurify';
 	import Form from '$lib/components/Form.svelte';
-	import { t, translations } from '$lib/translations';
-	import type { PageData } from './$types';
+	import type { OutputData } from '../../../types/OutputData';
 
-	export let data: PageData;
+	export let data: OutputData;
 
 	$: images = data.images;
-	$: locale = data.locale;
+	$: text = data.translations;
 </script>
 
 <svelte:head>
-	<title>{$t('contact').title}</title>
+	<title>{text.title}</title>
 	<meta name="description" content="Información para contactar" />
 </svelte:head>
 
 <section class="effect">
 	<p class="markdown">
-		{@html DOMPurify.sanitize(marked($t('contact').form.title, { async: false }))}
+		{@html DOMPurify.sanitize(marked(text.form.title, { async: false }))}
 	</p>
 	<div>
-		<img src={images.contact.src} alt={$t('contact')[images.contact.alt]} aria-hidden="true" />
-		<Form content={$t('contact').form} />
+		<img src={images.contact.src} alt={images.contact.alt} aria-hidden="true" />
+		<Form content={text.form} />
 	</div>
 </section>
 
 <style lang="scss">
-	@import '../../styles/colors.scss';
+	@import '../../../styles/colors.scss';
 	section {
 		padding-top: var(--padding-top-mobile);
 		display: flex;
