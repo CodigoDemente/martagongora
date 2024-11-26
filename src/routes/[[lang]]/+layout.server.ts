@@ -1,17 +1,19 @@
 
-import { fetchTranslation } from '$lib/translations';
+import { fetchTranslation } from '$lib/api/translations';
 import type { PageServerLoad } from './$types';
-import type { OutputData } from '../../types/OutputData';
+import type { OutputDataMenu } from '../../types/OutputData';
 
 
-export const load: PageServerLoad<OutputData> = async ({ params }: { params: { lang?: string } }) => {
+export const load: PageServerLoad<OutputDataMenu> = async ({ params }: { params: { lang?: string } }) => {
 	const lang = params.lang || 'es';
-        const translations = await fetchTranslation(lang, 'menu');
+        const translationsMenu = await fetchTranslation(lang, 'menu');
+        const translationsFooter = await fetchTranslation(lang, 'footer');
 
 	return {
-        translations,
-        lang,
-        defaultLocale: 'es',
-        locales: ['es', 'en']
+                translationsMenu,
+                translationsFooter,
+                lang,
+                defaultLocale: 'es',
+                locales: ['es', 'en']
 	};
 };

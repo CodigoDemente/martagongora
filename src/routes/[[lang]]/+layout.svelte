@@ -10,28 +10,23 @@
 	let isLoading: boolean = false;
 	let error: boolean = false;
 
-	$: menu = data.translations;
+	$: menu = data.translationsMenu;
+	$: footer = data.translationsFooter;
 	$: activeLang = data.lang;
 	$: defaultLocale = data.defaultLocale;
 	$: locales = data.locales;
 </script>
 
 <div class="app">
-	{#if isLoading}
-		<Loader />
-	{:else if error}
-		<p>There was an error</p>
-	{:else}
-		<Header {menu} {activeLang} {defaultLocale} {locales} />
+	<Header {menu} {activeLang} {defaultLocale} {locales} />
 
-		<main>
-			<slot />
-		</main>
+	<main>
+		<slot />
+	</main>
 
-		<ScrollToTop />
+	<ScrollToTop />
 
-		<Footer />
-	{/if}
+	<Footer {footer} />
 </div>
 
 <style lang="scss">

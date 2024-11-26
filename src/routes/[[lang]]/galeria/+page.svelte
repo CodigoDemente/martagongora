@@ -6,7 +6,10 @@
 	import { inview } from 'svelte-inview';
 	import type { InstagramImage } from '../../../types/InstagramImage';
 	import Loader from '$lib/components/Loader.svelte';
-	import { t } from '$lib/translations';
+	import type { OutputData } from '../../../types/OutputData';
+
+	export let data: OutputData;
+	$: text = data.translations;
 
 	let pictures: InstagramImage[] = [];
 	let isLoading = true;
@@ -44,7 +47,7 @@
 </script>
 
 <svelte:head>
-	<title>{$t('gallery').title}</title>
+	<title>{text.title}</title>
 	<meta name="description" content="Feed instagram" />
 </svelte:head>
 

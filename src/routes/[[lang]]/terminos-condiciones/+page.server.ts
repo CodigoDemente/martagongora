@@ -1,5 +1,5 @@
 import { fetchBlogImages, type ImageMap } from '$lib/images';
-import { fetchTranslation } from '$lib/translations';
+import { fetchTranslation } from '$lib/api/translations';
 import type { PageServerLoad } from '../$types';
 import type { OutputData } from '../../../types/OutputData';
 
