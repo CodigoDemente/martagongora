@@ -9,6 +9,18 @@ function getLang(event: RequestEvent): string {
 	return locale;
 }
 
+export async function fetchTranslation(locale: string, key: string): Promise<string> {
+	try {
+		const res = await fetch(`${PUBLIC_BACKEND_URL}/translation/${locale}`);
+		const data = await res.json();
+		return data[key];
+	}
+	catch (err) {
+		console.error(err);
+		throw err;
+	}
+}
+
 export const defaultLocale = 'es';
 
 export const config: Config = {
