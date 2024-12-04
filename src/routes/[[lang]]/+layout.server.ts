@@ -9,6 +9,8 @@ export const load: PageServerLoad<OutputDataMenu> = async ({
 }) => {
 	const availableLocales = await fetchLocales();
 
+	console.log('availableLocales', JSON.stringify(availableLocales));
+
 	const localeNames = availableLocales.map((locale) => locale.code);
 	const defaultLocale = availableLocales.find((locale) => locale.isDefault)?.code || localeNames[0];
 
