@@ -4,12 +4,10 @@ import adapter from '@sveltejs/adapter-vercel';
 export default {
 	preprocess: [vitePreprocess()],
 	kit: {
-		adapter:
-			adapter(/*{
+		adapter: adapter({
 			isr: {
-				expiration: 60 * 60 * 1.5, // 1.5 hours
-				bypassToken: process.env.BYPASS_TOKEN
+				expiration: 60 * 60 * 1.5 // 1.5 hours
 			}
-		}*/)
+		})
 	}
 };

@@ -2,6 +2,7 @@
 	import { marked } from 'marked';
 	import DOMPurify from 'isomorphic-dompurify';
 	import type { OutputData } from '../../../types/OutputData';
+	import { tImage } from '../../../lib/api/translations';
 
 	export let data: OutputData;
 
@@ -21,7 +22,7 @@
 				<p class="markdown">{@html DOMPurify.sanitize(marked(paragraph, { async: false }))}</p>
 			{/each}
 		</div>
-		<img src={images.about.src} alt={images.about.alt} aria-hidden="true" />
+		<img src={images.about.src} alt={tImage(images.about.alt || '', text)} aria-hidden="true" />
 	</div>
 </section>
 

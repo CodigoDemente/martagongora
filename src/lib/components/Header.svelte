@@ -31,7 +31,7 @@
 			on:click={() => (active = '')}
 			href={activeLang === defaultLocale ? '/' : `/${activeLang}`}
 		>
-			<img src={logo} alt="SvelteKit" />
+			<img src={logo} alt="Logo" />
 		</a>
 		<ul class={open ? 'list-open' : 'list'}>
 			{#each Object.entries(menu) as [key, text]}

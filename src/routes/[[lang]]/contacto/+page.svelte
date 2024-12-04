@@ -3,6 +3,7 @@
 	import DOMPurify from 'isomorphic-dompurify';
 	import Form from '$lib/components/Form.svelte';
 	import type { OutputData } from '../../../types/OutputData';
+	import { tImage } from '../../../lib/api/translations';
 
 	export let data: OutputData;
 
@@ -20,7 +21,7 @@
 		{@html DOMPurify.sanitize(marked(text.form.title, { async: false }))}
 	</p>
 	<div>
-		<img src={images.contact.src} alt={images.contact.alt} aria-hidden="true" />
+		<img src={images.contact.src} alt={tImage(images.contact.alt || '', text)} aria-hidden="true" />
 		<Form content={text.form} />
 	</div>
 </section>

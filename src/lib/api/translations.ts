@@ -1,4 +1,5 @@
 import { PUBLIC_BACKEND_URL } from '$env/static/public';
+import { getPath } from '../JSONHelper';
 import type { ApiLocale, Locale } from './types/translations';
 
 export async function fetchTranslation(locale: string, key: string): Promise<string> {
@@ -49,4 +50,9 @@ export async function fetchLocales(): Promise<Locale[]> {
 		console.error(err);
 		throw err;
 	}
+}
+
+export function tImage(alt: string, translations: Record<string, any>): string {
+	const text = getPath(translations, alt) as string;
+	return text || alt;
 }

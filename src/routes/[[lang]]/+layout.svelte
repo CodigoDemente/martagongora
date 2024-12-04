@@ -2,13 +2,10 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import ScrollToTop from '$lib/components/ScrollToTop.svelte';
-	import Loader from '$lib/components/Loader.svelte';
 	import '../styles.css';
 	import type { OutputDataMenu } from '../../types/OutputData';
 
 	export let data: OutputDataMenu;
-	let isLoading: boolean = false;
-	let error: boolean = false;
 
 	$: menu = data.translationsMenu;
 	$: footer = data.translationsFooter;

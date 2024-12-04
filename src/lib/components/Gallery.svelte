@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { IconChevronRight, IconChevronLeft, IconX } from '@tabler/icons-svelte';
+	import { tImage } from '../api/translations';
+	import { text } from '@sveltejs/kit';
 	export let gallery: { src: string; alt: string; id: string }[];
 	export let pictureId: string;
 	export let defaultModal: boolean;
@@ -22,7 +24,7 @@
 			<img
 				class="modal-image"
 				src={gallery[getIndexInArrayById].src}
-				alt={gallery[getIndexInArrayById].alt}
+				alt={tImage(gallery[getIndexInArrayById].alt || '', text)}
 			/>
 			{#if gallery[getIndexInArrayById].id !== gallery[gallery.length - 1].id}
 				<button
