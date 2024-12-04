@@ -2,6 +2,7 @@
 	import DOMPurify from 'isomorphic-dompurify';
 	import { marked } from 'marked';
 	import type { OutputData } from '../../types/OutputData';
+	import { tImage } from '../../lib/api/translations';
 
 	export let data: OutputData;
 
@@ -16,14 +17,14 @@
 
 <section>
 	<div class="firstBlock">
-		<img src={images[1].src} alt={images[1].alt || ''} />
+		<img src={images[1].src} alt={tImage(images[1].alt || '', text)} />
 		<p class="markdown">
 			{@html DOMPurify.sanitize(marked(text.paragraphs[0], { async: false }))}
 		</p>
 	</div>
 	<div class="secondBlock">
 		{#each [2, 3, 4] as num}
-			<img src={images[num].src} alt={images[num].alt || ''} />
+			<img src={images[num].src} alt={tImage(images[num].alt || '', text)} />
 		{/each}
 		<p class="markdown">
 			{@html DOMPurify.sanitize(marked(text.paragraphs[1], { async: false }))}
@@ -31,7 +32,7 @@
 	</div>
 	<div class="thirdBlock">
 		{#each [5, 6] as num}
-			<img src={images[num].src} alt={images[num].alt || ''} />
+			<img src={images[num].src} alt={tImage(images[num].alt || '', text)} />
 		{/each}
 		<p class="markdown">
 			{@html DOMPurify.sanitize(marked(text.paragraphs[2], { async: false }))}
@@ -39,7 +40,7 @@
 	</div>
 	<div class="fourthBlock">
 		{#each [7, 8] as num}
-			<img src={images[num].src} alt={images[num].alt || ''} />
+			<img src={images[num].src} alt={tImage(images[num].alt || '', text)} />
 		{/each}
 		<p class="markdown">
 			{@html DOMPurify.sanitize(marked(text.paragraphs[3], { async: false }))}
@@ -47,25 +48,25 @@
 	</div>
 	<div class="fifthBlock">
 		{#each [9, 10] as num}
-			<img src={images[num].src} alt={images[num].alt || ''} />
+			<img src={images[num].src} alt={tImage(images[num].alt || '', text)} />
 		{/each}
 	</div>
 	<div class="sixthBlock">
 		<div>
-			<img src={images[11].src} alt={images[11].alt || ''} />
-			<img src={images[13].src} alt={images[13].alt || ''} />
+			<img src={images[11].src} alt={tImage(images[11].alt || '', text)} />
+			<img src={images[13].src} alt={tImage(images[13].alt || '', text)} />
 		</div>
-		<img src={images[12].src} alt={images[12].alt || ''} />
+		<img src={images[12].src} alt={tImage(images[12].alt || '', text)} />
 	</div>
 	<div class="seventhBlock">
-		<img src={images[14].src} alt={images[14].alt || ''} />
+		<img src={images[14].src} alt={tImage(images[14].alt || '', text)} />
 	</div>
 	<div class="eightBlock">
-		<img src={images[15].src} alt={images[15].alt || ''} />
-		<img src={images[16].src} alt={images[16].alt || ''} />
+		<img src={images[15].src} alt={tImage(images[15].alt || '', text)} />
+		<img src={images[16].src} alt={tImage(images[16].alt || '', text)} />
 	</div>
 	<div class="ninthBlock">
-		<img src={images[17].src} alt={images[17].alt || ''} />
+		<img src={images[17].src} alt={tImage(images[17].alt || '', text)} />
 	</div>
 </section>
 
