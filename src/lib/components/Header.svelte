@@ -15,6 +15,12 @@
 	export let defaultLocale: string;
 	export let locales: string[];
 
+	const orderedMenu = {
+		gallery: menu.gallery,
+		about: menu.about,
+		contact: menu.contact
+	};
+
 	const menuKeyToUrl: { [key: string]: string } = {
 		gallery: 'galeria',
 		about: 'sobre-mi',
@@ -34,7 +40,7 @@
 			<img src={logo} alt="Logo" />
 		</a>
 		<ul class={open ? 'list-open' : 'list'}>
-			{#each Object.entries(menu) as [key, text]}
+			{#each Object.entries(orderedMenu) as [key, text]}
 				<li>
 					<a
 						class={active === menuKeyToUrl[key] ? 'active' : ''}
